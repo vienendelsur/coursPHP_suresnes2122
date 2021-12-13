@@ -5,7 +5,7 @@ initiation et cours PHP Colombbus
 DOSSIERS
 ## 00-exos
 ## 00-pages
-    ### 01_ma_page_php.php
+    ### 01_page.php
 ## 01-intro
     ### 01_introduction.php
         #### 1/ Réaliser un site dynamique 
