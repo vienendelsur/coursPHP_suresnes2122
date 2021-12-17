@@ -13,12 +13,13 @@ function whatDay() {
 
 // exo en utilisant strftime()
 
-function dateFR() {
+function dateFR() { // VOIR
     setlocale(LC_ALL, 'fr_FR');
     // echo "<p>Nous sommes le ";
     echo "<p>Nous sommes le "  . utf8_encode(strftime('%A %d %B %Y')) . "</p>";
     // echo "</p>";
 }
 
-
+// déclaration d'une constante qui contient une url ATTENTION on le déplacera plus tard VOIR
+define("validator","https://validator.w3.org/");
 ?>

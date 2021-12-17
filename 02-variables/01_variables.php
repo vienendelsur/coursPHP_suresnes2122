@@ -1,3 +1,6 @@
+<?php
+require_once '../inc/functions.php'; // APPEL DES FONCTIONS
+?>
 <!doctype html>
 <html lang="fr">
   <head>
@@ -18,7 +21,11 @@
     <header class="container-fluid bg-light">
       <h1 class="display-4">CoursPHP - 01 Variables</h1>
       <p class="lead">Les variables en PHP</p>
-      <?php echo "<p>Nom du fichier inclus : ".__FILE__ ."</p>"; ?>
+      <?php 
+      echo "<p>Nom du fichier inclus : ".__FILE__ ."</p>"; 
+      dateFR();
+      minutePap();
+      ?>
     </header> 
     <!-- fin container-fluid  -->
 
@@ -160,10 +167,134 @@
                         </tr>
                     </tbody>
                 </table>
+
+
+
             </div>
             <!-- fin col -->
         </section>
         <!-- fin row -->
+
+        <section class="row">
+            <div class="col-md-8">
+                <h2>Les opérateurs d'affectation combinés</h2>
+                <p>En plus de l'opérateur classique d'affectation = il en existe plusieurs</p>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="row">Opérateur</th>
+                            <th scope="row">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">+=</th>
+                            <td>
+                            Addition puis affectation :<br>
+                            $x += $y équivaut à $x = $x + $y<br>
+                            $y peut être une expression complexe dont la valeur est un nombre.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">-=</th>
+							<td>Soustraction puis affectation :<br>
+								$x -= $y équivaut à $x = $x - $y<br>
+								$y peut être une expression complexe dont la valeur est un nombre.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">*=</th>
+							<td>Multiplication puis affectation :<br>
+							$x *= $y équivaut à $x = $x * $y<br>
+							$y peut être une expression complexe dont la valeur est un nombre.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">**=</th>
+							<td>Puissance puis affectation<br>
+							$x**=2 équivaut à $x=($x)²</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">/=</th>
+							<td>Division puis affectation :<br>
+							$x /= $y équivaut à $x = $x / $y<br>
+							$y peut être une expression complexe dont la valeur est un nombre différent de 0.</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">%=</th>
+							<td>Modulo puis affectation :<br>
+							$x %= $y équivaut à $x = $x % $y $y<br>
+							$y peut être une expression complexe dont la valeur est un nombre.</td>
+                        </tr>
+
+                        <tr>
+                        <th scope="row">.=</th>
+							<td>Concaténation puis affectation :<br>
+							$x .= $y équivaut à $x = $x . $y<br>
+							$y peut être une expression littérale dont la valeur est une chaîne de caractères.</td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- fin col -->
+        </section>
+        <!-- fin row -->
+
+        <section class="row">
+            <div class="col-md-12">
+                <h2>Les constantes</h2>
+                <p>Vous serez parfois amené à utiliser de manière répétitive des informations devant rester constantes dans toutes les pages d’un même site. Il peut s’agir de texte ou de nombres qui reviennent souvent. Pour ne pas risquer l’écrasement accidentel de ces valeurs, qui pourrait se produire si elles étaient contenues dans des variables, vous avez tout intérêt à les enregistrer sous forme de constantes personnalisées.</p>
+                <p>On peut définir ses constantes soi-même : pour définir des constantes personalisées, utilisez la fonction <code>define()</code> dont la syntaxe est la suivante <code></code> cf. la page suivante <a href="../00-pages/03_page.php" target="_blank">page avec des constantes</a></p>
+            </div>
+            <!-- fin col -->
+
+            <div class="col-md-12">
+                <h2>Les constantes prédéfinies</h2>
+                <p>Il existe dans PHP un grand nombre de constantes prédéfinies, que vous pouvez utiliser dans les fonctions comme paramètres permettant de définir des options. Nous ne pouvons les citer toutes tant elles sont nombreuses, mais nous les définirons au fur et à mesure de nos besoins. Sur cette page la liste des <a href="../00-pages/04_page.php" target="_blank">constantes prédéfinies </a></p>
+                
+                <table class="table table-striped">
+                    <thead>
+                            <tr>
+                                <th scope="col">Constantes</th>
+                                <th scope="col">Résultat</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><code>PHP_VERSION</code></th>
+                            <td>Version de PHP sur ce serveur n ° : <?php echo PHP_VERSION; ?> </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><code>PHP_OS</code></th>
+                            <td>Système d'exploitation (Operating System) du serveur : <?php echo PHP_OS; ?> </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><code>DEFAULT_INCLUDE_PATH</code></th>
+                            <td>Chemin d'accès aux fichiers par défaut : <?php echo DEFAULT_INCLUDE_PATH; ?> </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><code>__FILE__</code></th>
+                            <td>Nom du fichier en cours d'exécution : <?php echo __FILE__; ?> </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"><code>__LINE__</code></th>
+                            <td> Numéro de la ligne du fichier : <?php echo __LINE__; ?> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- fin col -->
+        </section>
+        <!-- fin row -->
+
+
     </div>  
     <!-- fin container  -->
     <!-- footer en require  -->

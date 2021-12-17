@@ -1,6 +1,5 @@
 <?php
-// appel de mon ficher de fonctions
-require_once '../inc/functions.php';
+require_once '../inc/functions.php';  // appel du fichier de fonctions
 
 // 6 variables pour tester plus bas dans la page
 $chaine = "Longtemps je me suis couché ... dans le temps.";
@@ -56,6 +55,10 @@ $frat = "Fraternité";
 
           echo "<hr>";
           dateFR();
+
+          echo "<hr>";
+
+          if (defined("validator")) echo "la constante validator est bien définie";
           
           ?>
         </div>

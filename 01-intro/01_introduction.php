@@ -1,3 +1,7 @@
+<?php 
+// appel de mon ficher de fonctions
+require_once '../inc/functions.php';
+?> 
 <!doctype html>
 <html lang="fr">
   <head>
@@ -18,6 +22,12 @@
     <header class="container-fluid bg-light">
       <h1 class="display-4">CoursPHP - Introduction</h1>
       <p class="lead">PHP : Php Hypertext Preprocessor</p>
+      <?php 
+        //if (defined("validator")) echo "la constante validator est bien définie";
+        echo "<p>Validez votre HTML CSS sur le site du <a href=\"" .validator. "\" target=\"_blank\">Validator</a></p>";
+        
+        minutePap();
+      ?> 
     </header>
 
     <div class="container bg-white">

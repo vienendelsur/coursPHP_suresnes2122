@@ -1,3 +1,6 @@
+<?php
+require_once '../inc/functions.php'; // APPEL DES FONCTIONS
+?>
 <!doctype html>
 <html lang="fr">
   <head>
@@ -8,18 +11,41 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>CoursPHP - Suresnes 2021/2022</title>
+    <title>CoursPHP - NUMERO TITRE</title>
     <!-- mes styles -->
     <link rel="stylesheet" href="../css/style.css">
 
   </head>
   <body>
-    <h1>CoursPHP - Introduction</h1>
+    <header class="container-fluid bg-light">
+      <h1 class="display-4">CoursPHP - NUMERO TITRE</h1>
+      <p class="lead">SOUS TITRE</p>
+    </header> 
+    <!-- fin container-fluid header  -->
 
-    <?php 
-    echo texte ;
-    ?> 
+    <div class="container bg-white">
+
+      <section class="row">
+
+        <div class="col-md-6">
+          <h2>TitreNiveau2</h2>
+        </div>
+        <!-- fin col -->
+
+        <div class="col-md-6">
+          <h2>TitreNiveau2</h2>
+        </div>
+        <!-- fin col -->
+
+      </section>
+      <!-- fin row -->
+
+    </div>
     <!-- fin container  -->
+
+	
+    <!-- footer en require  -->
+    <?php require_once '../inc/footer.inc.php'; ?>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
