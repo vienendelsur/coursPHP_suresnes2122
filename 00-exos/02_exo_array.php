@@ -70,6 +70,95 @@
             echo "<p> le nombre de valeurs dans le tableau est de : avec count() "  .count($couleurs). "</p>";
             echo "<p> le nombre de valeurs dans le tableau est de :  avec sizeof() "  .sizeof($couleurs). " </p>";
 
+            // on va faire une boucle pour afficher les valeurs d'un tableau
+            // foreach >>> "pour chaque" >>> le moyen le plus simple et automatique de parcourir un tableau
+
+            echo "<ul>";
+            foreach ($tableau1 as $acteurs) {
+              echo "<li> $acteurs </li>";
+            }
+            echo "</ul>";
+
+            // une nouvelle foreach avec le tableau2 
+            // à chaque tour de boucle la variable $pays prend les valeurs du tableau ; le mot clef "as" est obligatoire
+            echo "<ol>";
+            foreach ($tableau2 as $pays) {
+              echo "<li> $pays </li>";
+            }
+            echo "</ol>";
+
+            $tableau1[] = "Raimu";// rajout d'une valeur au tableau
+
+
+            echo "<ol>";
+            foreach ( $tableau1 as $indice => $acteurs ) {
+              echo "<li>Indice : $indice correspond à $acteurs </li>";// quand il y a 2 variables après "as" celle de gauche parcourt les indices et celle de droite parcourt les valeurs 
+              // echo '<li>Indice : ' .$indice. ' correspond à ' .$acteurs. ' </li>';
+            }
+            echo "</ol>";
+
+            echo "<ol>";
+            foreach ( $couleurs as $indice => $teinte ) {
+              echo "<li>Indice : $indice correspond à $teinte </li>";
+            }
+            echo "</ol>";
+
+          // 1 Déclarez un tableau associatif "$contacts" aavec les indices "prenom", "nom", "email" et "tel" et vous y mettez les valeurs correspondantes à un seul contact (le votre)
+          // 2 Puis avec une boucle foreach vous affichez le valeurs dans une ul
+          // 3 Puis dans une autre boucle vous affichez les valeurs dans des p sauf le prénom qui doit être dans un h3 (aide >>> if else)
+
+          $contacts = array(
+            'prenom' => 'Victor',
+            'nom' => 'Hugo',
+            'email' => 'victor.hugo@france.fr ',
+            'tel' => '06 63 74 11 35',
+            );
+
+            debug($contacts);
+
+            echo "<ul>";
+            foreach ($contacts as $personne) {
+              echo "<li> $personne </li>";
+            }
+            echo "</ul>";
+
+            foreach ($contacts as $indice => $personne) {
+              // echo "<p>$indice : $infos </p>";
+              if ($indice == 'nom') {
+                echo "<h3>$personne</h3>";
+              } else {
+                echo "<p>$personne </p>";
+              }
+            } 
+            echo "<hr>";
+            // tableaux multidimensionnels un tableau avec des "sous-tableaux"
+
+            $tableau_multi = array (
+              0 => array (
+                'prenom' => 'Jean',
+                'nom' => 'Dujardin',
+                'email' => 'j.dujardin@gmail.com ',
+                'tel' => '06 23 56 98 78',
+              ),
+              1 => array (
+                'prenom' => 'Marion',
+                'nom' => 'Cotillard',
+                'email' => 'm.cotillard@gmail.com ',
+                'tel' => '06 25 56 89 74',
+              ),
+              2 => array (
+                'prenom' => 'John',
+                'nom' => 'Wayne',
+              ),
+            );
+
+            debug($tableau_multi);
+            debug($tableau_multi[2]);
+
+            debug($tableau_multi[1]['prenom']);
+
+
+
           ?>
         </div>
       </section>
