@@ -150,16 +150,121 @@
                 'prenom' => 'John',
                 'nom' => 'Wayne',
               ),
+              3 => array (
+                'prenom' => 'Gary',
+                'nom' => 'Grant',
+              ),
             );
 
-            debug($tableau_multi);
-            debug($tableau_multi[2]);
+            debug($tableau_multi);// fonction pour afficher tout le tableau
+            debug($tableau_multi[2]); // infos sur l'indice 2 du tableau
 
-            debug($tableau_multi[1]['prenom']);
+            debug($tableau_multi[1]['nom']);// sur l'indice 1 la valeur du nom dans le sous-tableau
+            // BOUCLE FOR
+            echo "<hr><pre class=\"bg-warning\">BOUCLE FOR</pre>";
+            // Pour parcourir le tableau multidimensionnel on peut faire une boucle for car ses indices sont numériques
+            for ($i = 0; $i < count($tableau_multi); $i++) {// tant que $i est inférieur au nombre des éléments dans le tableau, que lon compte avec count() on entre dans la boucle
+
+              // echo '<p>' .$tableau_multi[$i]['prenom']. '</p>';//$i va successivement afficher les informations des indices nommés
+              echo "<p>" .$tableau_multi[$i]['prenom']. " " .$tableau_multi[$i]['nom']. "</p>";
+            }
+            echo "<hr>";
 
 
+          // BOUCLE FOREACH
+
+            // Pour parcourir avec une boucle foreach, une autre méthode
+            // on passe en variable les contenus de chaque indice du tableau et en ciblant les indices nommés des sous-tableaux associatifs
+            echo "<hr><pre class=\"bg-warning\">1/ BOUCLE FOREACH</pre>";
+
+            echo "<p>";
+            foreach ($tableau_multi as $indice => $nom ) {
+              // debug($prenom);
+              echo  '<strong>' .$tableau_multi[$indice]['nom']. '</strong> - ';
+            }
+            echo "</p>";
+
+            echo "<hr><pre class=\"bg-warning\">2/ BOUCLE FOREACH</pre>";
+
+            echo "<p>";
+            foreach ($tableau_multi as $indice => $acteurs ) {
+              // debug($prenom);
+              echo '<strong>' .$acteurs['prenom']. ' ' .$acteurs['nom']. ' </strong> <br> ';
+            }
+            echo "</p>";
+
+            // EXO 
+            // 1- faire un tableau $tailles avec des tailles de vêtements de l'extra small, small, medium, large  et extra-large et les aficher dans une boucle foreach dans une ul
+            echo "<hr><pre class=\"bg-warning\">1/ BOUCLE FOREACH LES TAILLES </pre>";
+            $tailles = ['extra-small', 'small', 'medium', 'large', 'extra-large'];
+            // $tailles_bis = array ('small', 'medium', 'large', 'extra-large');
+            debug($tailles);
+
+            echo "<ul>";
+            foreach( $tailles as $indice => $size ) {
+              echo "<li>" .$indice. " pour " .$size. "</li>";
+            }
+            echo "</ul>";
+
+            // 2 le même dans un tableau associatif nom du tableau $tailles2
+
+            $tailles2 = [
+              "xs" => "XS-extra-small",
+              "s" => "S-small",
+              "m" => "M-medium",
+              "l" => "L-large",
+              "xl" => "XL-extra-large"
+            ];
+
+            echo "<hr><pre class=\"bg-warning\">1/ BOUCLE FOREACH LES TAILLES TABLEAU 2</pre>";
+            echo "<ul>";
+              foreach( $tailles2 as $indice2 => $size2 ) {
+                echo "<li> $indice2 pour $size2 </li>";
+              }
+            echo "</ul>";
+
+            // EXO suite cette fois-ci mettez les valeurs du tableau dans un select de formulaire (on n'a pas besoin de la balise form pour l'exo)
+            echo "<hr><pre class=\"bg-warning\">1/ BOUCLE FOREACH LES TAILLES TABLEAU 2 DANS UN SELECT</pre>";
+            
+            echo "<label for=\"size2\">Tailles</label><select class=\"form-control w-25\">";
+            foreach( $tailles2 as $indice2 => $size2 ) {
+              echo "<option value=\"$indice2\"> $size2 </option>";
+            }
+            echo "</select>";
+
+            $eleve = [
+              "rd" => "Redha",
+              "vt" => "Vincent",
+              "ar" => "Arnold",
+              "nd" => "Nadia",
+              "ms" => "Mostapha"
+            ];
+
+            echo "<hr><pre class=\"bg-warning\">1/ BOUCLE FOREACH LES APPRENANTS</pre>";
+            echo "<ul>";
+              foreach( $eleve as $indice3 => $pet3 ) {
+                echo "<li> $eleve pour $pet3 </li>";
+              }
+            echo "</ul>";
+
+            
+            echo "<hr><pre class=\"bg-warning\">1/ BOUCLE FOREACH LES APPRENANTS TABLEAU 2 DANS UN SELECT</pre>";
+            
+            echo "<label for=\"size2\"> Choisissez l'élève à taper</label><select class=\"form-control w-25\">";
+            foreach( $eleve as $indice3 => $pet3 ) {
+              echo "<option value=\"$indice3\"> $pet3 </option>";
+            }
+            echo "</select>";
 
           ?>
+
+          <!-- <select>
+            <option value="xs"> XS-extra-small </option>
+            <option value="s"> S-small </option>
+            <option value="m"> M-medium </option>
+            <option value="l"> L-large </option>
+            <option value="xl"> XL-extra-large </option>
+          </select> -->
         </div>
       </section>
     </div>

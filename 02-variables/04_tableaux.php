@@ -134,11 +134,46 @@
 
       <section class="row">
         <div class="col-md-6">
-          <h2>4- Tableaux multidimensionnels</h2>
+          <h2>4- Tableaux associatif dans un &lt;select></h2>
+          <p>Pour mettre le tableau associatif dans un select, avec une boucle foreach qui fabrique les <code>&lt;option value=""></code> de la balise select 
+            <code><br>
+            echo "&lt;label for=\"size2\">Tailles</label>&lt;select class=\"form-control w-25\">";<br>
+          foreach( $tailles2 as $indice2 => $size2 ) {<br>
+            echo "&lt;option value=\"$indice2\"> $size2 &lt;/option>";<br>
+          }
+          echo "&lt;/select>";
+            </code>
+          </p>
         </div>
       <!-- fin col -->
         <div class="col-md-6">
-          <h2>TitreNiveau2</h2>
+          <h2>Exemple</h2>
+          <?php 
+           $tailles2 = [
+            "xs" => "XS-extra-small",
+            "s" => "S-small",
+            "m" => "M-medium",
+            "l" => "L-large",
+            "xl" => "XL-extra-large"
+          ];
+
+          echo "<hr><pre class=\"bg-warning\">1/ BOUCLE FOREACH LES TAILLES TABLEAU 2</pre>";
+          echo "<ul>";
+            foreach( $tailles2 as $indice2 => $size2 ) {
+              echo "<li> $indice2 pour $size2 </li>";
+            }
+          echo "</ul>";
+
+          // EXO suite cette fois-ci mettez les valeurs du tableau dans un select de formulaire (on n'a pas besoin de la balise form pour l'exo)
+          echo "<hr><pre class=\"bg-warning\">1/ BOUCLE FOREACH LES TAILLES TABLEAU 2 DANS UN SELECT</pre>";
+          
+          echo "<label for=\"size2\">Tailles</label><select class=\"form-control w-25\">";
+          foreach( $tailles2 as $indice2 => $size2 ) {
+            echo "<option value=\"$indice2\"> $size2 </option>";
+          }
+          echo "</select>";
+
+        ?> 
         </div>
       <!-- fin col -->
       </section>
