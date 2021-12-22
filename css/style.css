@@ -7,7 +7,8 @@ font-family: 'Montserrat', sans-serif; */
 body {
     font-family: 'Merriweather', serif;
     font-size: 1em;
-    background-color: rgb(186, 248, 255);
+    background-image: url(../img/moroccan-flower.png);
+    background-repeat: repeat;
 }
 
 h1, h2, h3, h4, h5, h6 {
