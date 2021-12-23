@@ -16,7 +16,7 @@
   </head>
   <body>
   <header class="container-fluid">
-        <h1 class="display-4">CoursPHP - Exo 02 Array</h1>
+        <h1 class="display-4 text-center">CoursPHP - Exo 02 Array</h1>
     </header> 
     <!-- fin container-fluid  -->
 

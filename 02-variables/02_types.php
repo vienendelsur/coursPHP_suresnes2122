@@ -22,8 +22,8 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
 
   </head>
   <body>
-    <header class="container-fluid bg-light">
-      <h1 class="display-4">CoursPHP - 02 Types de données</h1>
+    <header class="container-fluid f-header p-2">
+      <h1 class="display-4 text-center">CoursPHP - 02 Types de données</h1>
       <p class="lead">Les types de données</p>
       <?php 
       minutePap();
@@ -31,7 +31,7 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
     </header> 
     <!-- fin container-fluid header  -->
 
-    <div class="container bg-white">
+    <div class="container bg-white mt-2 mb-2 m-auto p-2">
 
       <section class="row">
 

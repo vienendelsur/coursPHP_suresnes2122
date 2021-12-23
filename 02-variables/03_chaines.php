@@ -20,8 +20,8 @@
 
   </head>
   <body>
-    <header class="container-fluid bg-light">
-      <h1 class="display-4">CoursPHP - 2 les chaînes  de caractères</h1>
+    <header class="container-fluid f-header p-2">
+      <h1 class="display-4 text-center">CoursPHP - 2 les chaînes  de caractères</h1>
       <p class="lead">Les chaînes de caractères sont avec les nombres et les types de données les plus manipulés sur un site web. De surcroît, dans les échanges entre le client et le serveur au moyen de formulaires, toutes les données sont transmises sous forme de chaînes, d’où leur importance.</p>
       <?php 
         $varcoucou = "coucou !";
@@ -31,7 +31,7 @@
     </header> 
     <!-- fin container-fluid header  -->
 
-    <div class="container bg-white">
+    <div class="container bg-white mt-2 mb-2 m-auto p-2">
 
       <section class="row">
 

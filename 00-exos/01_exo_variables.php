@@ -27,7 +27,7 @@ $frat = "Fraternité";
 
   </head>
   <body>
-  <header class="container-fluid bg-light">
+  <header class="container-fluid f-header p-2">
         <h1>CoursPHP - Exo 01 Variables</h1>
     </header> 
     <!-- fin container-fluid  -->

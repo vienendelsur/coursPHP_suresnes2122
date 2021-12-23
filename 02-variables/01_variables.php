@@ -23,8 +23,8 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
     
   </head>
   <body>
-    <header class="container-fluid bg-light">
-      <h1 class="display-4">CoursPHP - 01 Variables</h1>
+    <header class="container-fluid f-header p-2">
+      <h1 class="display-4 text-center">CoursPHP - 01 Variables</h1>
       <p class="lead">Les variables en PHP</p>
       <?php 
       echo "<p>Nom du fichier inclus : ".__FILE__ ."</p>"; 
@@ -34,7 +34,7 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
     </header> 
     <!-- fin container-fluid  -->
 
-    <div class="container bg-white">
+    <div class="container bg-white mt-2 mb-2 m-auto p-2">
         <section class="row">
             <div class="col-sm-12 col-md-4">
                         <h2>Les variables </h2>

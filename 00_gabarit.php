@@ -23,13 +23,13 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
 
   </head>
   <body>
-    <header class="container-fluid bg-light">
-      <h1 class="display-4">CoursPHP - NUMERO TITRE</h1>
+    <header class="container-fluid f-header p-2">
+      <h1 class="display-4 text-center">CoursPHP - NUMERO TITRE</h1>
       <p class="lead">SOUS TITRE</p>
     </header> 
     <!-- fin container-fluid header  -->
 
-    <div class="container bg-white">
+    <div class="container bg-white mt-2 mb-2 m-auto p-2">
 
       <section class="row">
 

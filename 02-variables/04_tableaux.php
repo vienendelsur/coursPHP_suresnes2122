@@ -21,13 +21,13 @@
 
   </head>
   <body>
-    <header class="container-fluid bg-light">
-      <h1 class="display-4">CoursPHP - 04 tableaux</h1>
+    <header class="container-fluid f-header p-2">
+      <h1 class="display-4 text-center">CoursPHP - 04 tableaux</h1>
       <p class="lead">Les tableaux représentent un type composé car ils permettent de stocker sous un même nom de variable plusieurs valeurs indépendantes. C’est comme un tiroir divisé en compartiments. Chaque compartiment, que nous nommerons un élément du tableau, est repéré par un indice numérique (le premier ayant par défaut la valeur 0 et non 1). D’où l’expression de "tableau indicé".</p>
     </header> 
     <!-- fin container-fluid header  -->
 
-    <div class="container bg-white">
+    <div class="container bg-white mt-2 mb-2 m-auto p-2">
 
       <section class="row">
 
@@ -116,7 +116,7 @@
               'tel' => '06 63 74 11 35',
               );
 
-            echo "<div class=\"border border-warning bg-light w-50\">";
+            echo "<div class=\" bg-light w-50\">";
              foreach ($contacts as $indice => $personne) {
               // echo "<p>$indice : $infos </p>";
               if ($indice == 'nom') {
