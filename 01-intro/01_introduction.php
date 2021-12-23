@@ -12,7 +12,7 @@ require_once '../inc/functions.php';
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>CoursPHP - Suresnes 2021/2022</title>
+    <title>CoursPHP - Chapitre - Suresnes 2021/2022</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@ require_once '../inc/functions.php';
   </head>
   <body>
     <header class="container-fluid f-header p-2">
-      <h1 class="display-4 text-center">CoursPHP - Introduction</h1>
+      <h1 class="display-4 text-center">CoursPHP - Chapitre - Introduction</h1>
       <p class="lead">PHP : Php Hypertext Preprocessor</p>
       <?php 
         //if (defined("validator")) echo "la constante validator est bien définie";

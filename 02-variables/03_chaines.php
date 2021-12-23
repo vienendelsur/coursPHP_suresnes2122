@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>CoursPHP - 2 les chaînes </title>
+    <title>CoursPHP - Chapitre - 2 les chaînes </title>
 	<!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
   </head>
   <body>
     <header class="container-fluid f-header p-2">
-      <h1 class="display-4 text-center">CoursPHP - 2 les chaînes  de caractères</h1>
+      <h1 class="display-4 text-center">CoursPHP - Chapitre - 2 les chaînes  de caractères</h1>
       <p class="lead">Les chaînes de caractères sont avec les nombres et les types de données les plus manipulés sur un site web. De surcroît, dans les échanges entre le client et le serveur au moyen de formulaires, toutes les données sont transmises sous forme de chaînes, d’où leur importance.</p>
       <?php 
         $varcoucou = "coucou !";

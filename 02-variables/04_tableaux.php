@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>CoursPHP - 02 tableaux</title>
+    <title>CoursPHP - Chapitre - 02 tableaux</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
   </head>
   <body>
     <header class="container-fluid f-header p-2">
-      <h1 class="display-4 text-center">CoursPHP - 04 tableaux</h1>
+      <h1 class="display-4 text-center">CoursPHP - Chapitre - 04 tableaux</h1>
       <p class="lead">Les tableaux représentent un type composé car ils permettent de stocker sous un même nom de variable plusieurs valeurs indépendantes. C’est comme un tiroir divisé en compartiments. Chaque compartiment, que nous nommerons un élément du tableau, est repéré par un indice numérique (le premier ayant par défaut la valeur 0 et non 1). D’où l’expression de "tableau indicé".</p>
     </header> 
     <!-- fin container-fluid header  -->

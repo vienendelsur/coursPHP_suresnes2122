@@ -11,7 +11,7 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>CoursPHP - Suresnes 2021/2022 - 01 Variables</title>
+    <title>CoursPHP - Chapitre - Suresnes 2021/2022 - 01 Variables</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
   </head>
   <body>
     <header class="container-fluid f-header p-2">
-      <h1 class="display-4 text-center">CoursPHP - 01 Variables</h1>
+      <h1 class="display-4 text-center">CoursPHP - Chapitre 02 - 01 Variables</h1>
       <p class="lead">Les variables en PHP</p>
       <?php 
       echo "<p>Nom du fichier inclus : ".__FILE__ ."</p>"; 
