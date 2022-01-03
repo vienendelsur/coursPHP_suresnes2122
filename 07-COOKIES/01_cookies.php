@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>CoursPHP - Chapitre 04 - 01 GET</title>
+    <title>CoursPHP - Chapitre 07 - COOKIES</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,8 +22,8 @@
   </head>
   <body>
     <header class="container-fluid f-header p-2">
-      <h1 class="display-4 text-center">CoursPHP - Chapitre 04 - 01 GET</h1>
-      <p class="lead">$_GET[] représente les données qui transitent par l'url</p>
+      <h1 class="display-4 text-center">CoursPHP - Chapitre 07 - COOKIES</h1>
+      <p class="lead">SOUS TITRE</p>
     </header> 
     <!-- fin container-fluid header  -->
 
@@ -32,28 +32,12 @@
       <section class="row">
 
         <div class="col-md-6">
-          <h2>La méthode GET</h2>
-          <ul>
-            <li>$_GET[] est une superglobale, et un tableau (array) comme toutes les superglobales</li>
-            <li>Superglobale signifie que cette variable est disponible partout dans le script, y compris au sein des fonctions</li>
-            <li>Les informations transitent selon une syntaxe précise dans l'url ex : <code class="bg-primary text-white">mapage.php?indice1=valeur1&indiceN=valeurN</code></li>
-            <li>Quand on receptionne les données $_GET se remplit dans un array selon la syntaxe suivante <code><br>
-              $_GET = array(<br>
-                'indice1' => 'valeur1',<br>
-                'indiceN' => 'valeurN'<br>
-              );<br>
-            </code></li>
-            <li>Pour voir le tableau on fera d'abord un var_dump($_GET)</li>
-          </ul>
+          <h2>TitreNiveau2</h2>
         </div>
         <!-- fin col -->
 
         <div class="col-md-6">
-          <h2>Exemples :</h2>
-          <p><a href="02_method_get.php?article=jean&couleur=bleu&prix=50">Un jean bleu à 50 €</a></p>
-          <!-- nom de la page ? indice1=valeur1 & indice2=valeur2 & indice3=valeur3 -->
-          <p><a href="02_method_get.php?article=robe&couleur=rouge&prix=70">Une robe rouge à 70 €</a></p>
-          <p><a href="02_method_get.php?article=pull&couleur=blanc&prix=60">Un pull blanc à 60 €</a></p>
+          <h2>TitreNiveau2</h2>
         </div>
         <!-- fin col -->
 

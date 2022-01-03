@@ -1,5 +1,5 @@
 <footer class="bg-warning text-white text-center p-4">
-    <div>
+    <div class="container">
     <?php echo "<p>Exemple de constante en PHP >>> Chemin absolu du fichier en cours : " . __FILE__ . "</p>"; ?>
         <p>
         <?php 

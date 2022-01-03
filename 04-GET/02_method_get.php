@@ -30,7 +30,7 @@
       <section class="row">
         <div class="col-md-12">
 			<?php 
-				// debug($_GET); // à enlever en production
+				debug($_GET); // à enlever en production
 				// if isset : est-il établi que nous avons toutes les informations dans $_GET ? 
 
 				if (isset($_GET['article']) && isset($_GET['couleur']) && isset($_GET['prix'])) { // si oui si c'est vrai 
@@ -38,7 +38,7 @@
 
 					echo "<div class=\"border border-primary w-50 p-4\">";
 					echo "<p>Produit : " .$_GET['article']. " *** Couleur : " .$_GET['couleur']. "</p>";// on affiche les valeurs
-					echo "<p class=\"bg-success\">Prix : " .$_GET['prix']. " € </p>";
+					echo "<p class=\"bg-light\">Prix : " .$_GET['prix']. " € </p>";
 					echo "</div>";
 				} else {
 					echo "<h2>Infos sur le produit</h2>";
