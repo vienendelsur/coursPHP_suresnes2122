@@ -3,3 +3,4 @@ Informations reçues : Jean Gabin gabin@gmail.com 16 rue du soleil
 Informations reçues : Raymond Queneau queneau@gmail.com 16 rue du soleil
 Informations reçues : Patrick isola isola.patrick@gmail.com 16 rue du soleil
 Informations reçues : Nadia Coucou isol@gma.com adresse
+Informations reçues : toto toto isola.patrick@gmail.com test
