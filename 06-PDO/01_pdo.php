@@ -51,8 +51,8 @@
           // connexion à la BDD
             $pdoENT = new PDO( 'mysql:host=localhost;dbname=entreprise',// hôte et nom de la BDD
             'root',// le pseudo 
-            // '',// le mot de passe
-            'root',// le mdp pour MAC avec MAMP
+            '',// le mot de passe
+            // 'root',// le mdp pour MAC avec MAMP
             array(
               PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,// pour afficher les erreurs SQL dans le navigateur
               PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',// pour définir le charset des échanges avec la BDD
@@ -140,7 +140,52 @@
               echo "<p>Nom : " .$ligne['prenom']. " " .$ligne['nom']." -  service : " .$ligne['service']. "</p>";
             }
 
+            // EXO afficher la liste des différents services dans une ul en mettant un service par li 
+            // afficher également le nombre de service
+            // SELECT DISTINCT(service) FROM employes ORDER BY service
+            $requete = $pdoENT->query(" SELECT DISTINCT(service) FROM employes ORDER BY service ");
+            $nbr_services = $requete->rowCount();
+            debug($nbr_services);
+            echo "<p>Il y a $nbr_services services dans l'entreprise</p>";
+            echo "<ul>";
+            while ( $ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
+              echo "<li> " .$ligne['service']. "</li>";
+            }
+            echo "</ul>";
           ?>
+
+          <ul class="alert alert-success">
+            <?php            
+              $requete = $pdoENT->query(" SELECT DISTINCT(service) FROM employes ORDER BY service ");
+              // $nbr_services = $requete->rowCount();
+              // debug($nbr_services);
+              while ( $ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
+                echo "<li> " .$ligne['service']. "</li>";
+              }
+            ?>
+          </ul>
+        </div>
+      <!-- fin col -->
+      </section>
+      <!-- fin row -->
+      <section class="row">
+        <div class="col-md-12">
+          <!-- Exo 1 dans un h2 afficher la phrase suivante "il y X employés dans l'entreprise -->
+          <!-- puis afficher TOUTES les informations des employés dans un tableau HTML -->
+          <!-- la requête SQL est triée par sexe puis par nom de famille -->
+
+            <?php 
+            $requete = $pdoENT->query(" SELECT * FROM employes ORDER BY sexe DESC, nom ASC ");
+            $nbr_employes = $requete->rowCount();
+            // debug($nbr_employes);
+            echo "<h2>Il y a $nbr_employes employés dans l'entreprise</h2>";
+
+            while ( $ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
+              echo "<td>" .$ligne['prenom']. "</td>";
+            }
+
+            ?>   
+          
         </div>
       <!-- fin col -->
       </section>
