@@ -175,15 +175,35 @@
           <!-- la requête SQL est triée par sexe puis par nom de famille -->
 
             <?php 
-            $requete = $pdoENT->query(" SELECT * FROM employes ORDER BY sexe DESC, nom ASC ");
+            $requete = $pdoENT->query(" SELECT * FROM employes ORDER BY sexe ASC, nom ASC ");
             $nbr_employes = $requete->rowCount();
             // debug($nbr_employes);
             echo "<h2>Il y a $nbr_employes employés dans l'entreprise</h2>";
+            echo "<table class=\"table table-striped\">";
+              echo "<tr>";
+                echo "<th>Id</th>";
+                echo "<th>Nom, prénom</th>";
+                echo "<th>Service</th>";
+                echo "<th>Salaire mensuel</th>";
+                echo "<th>Date d'embauche</th>";
+              echo "</tr>";
+                while ( $ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
+                  echo "<tr><td> n° " .$ligne['id_employes']. "</td>";
+                  
+                  // si c'est un homme ecrivez Monsieur, sinon ecrivez Madame if ... else
+                  echo "<td>" 
+                  
+                  .$ligne['sexe'];
+                  
+                  
+                  echo $ligne['prenom']. " " .$ligne['nom']. "</td>";
 
-            while ( $ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
-              echo "<td>" .$ligne['prenom']. "</td>";
-            }
+                  echo "<td>" .$ligne['service']. "</td>";
+                  echo "<td>" .$ligne['salaire']. " € </td>";
+                  echo "<td>" .$ligne['date_embauche']. "</td></tr>";
+                }
 
+            echo "</table>";
             ?>   
           
         </div>
