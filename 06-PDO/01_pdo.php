@@ -188,24 +188,43 @@
                 echo "<th>Date d'embauche</th>";
               echo "</tr>";
                 while ( $ligne = $requete->fetch(PDO::FETCH_ASSOC)) {
-                  echo "<tr><td> n° " .$ligne['id_employes']. "</td>";
-                  
-                  // si c'est un homme ecrivez Monsieur, sinon ecrivez Madame if ... else
-                  echo "<td>" 
-                  
-                  .$ligne['sexe'];
-                  
-                  
-                  echo $ligne['prenom']. " " .$ligne['nom']. "</td>";
+                  echo "<tr><td> n° " .$ligne['id_employes']. "</td>"; 
 
+                  // if ... else
+                  if( $ligne['sexe'] == 'f') {
+                    echo "<td>Mme ";
+                  } else {
+                    echo "<td>M. ";
+                  }
+
+                  echo $ligne['prenom']. " " .$ligne['nom']. "</td>";
                   echo "<td>" .$ligne['service']. "</td>";
                   echo "<td>" .$ligne['salaire']. " € </td>";
                   echo "<td>" .$ligne['date_embauche']. "</td></tr>";
                 }
-
             echo "</table>";
-            ?>   
-          
+            ?>  
+            <hr>
+            <table class="table table-striped table-success">
+              <tr>                
+                <th>Nom, prénom</th>
+                <th>Service</th>
+              </tr>
+            <?php 
+              foreach ( $pdoENT->query( " SELECT nom, prenom, sexe, service FROM employes ORDER BY sexe ASC, nom ASC " ) as $infos ) {
+                // $infos fabrique un tableau à chaque tour de boucle pour chaque enregistrement, nous pouvons ensuite les parcourir 
+                // debug($infos);
+                echo "<tr>";
+                // if ... else
+                if( $infos['sexe'] == 'f') {
+                  echo "<td>Mme ";
+                } else {
+                  echo "<td>M. ";
+                }
+               echo $infos['nom']. " " .$infos['prenom']. "</td><td>" .$infos['service']. "</td></tr>";
+              }
+            ?> 
+            </table>
         </div>
       <!-- fin col -->
       </section>
