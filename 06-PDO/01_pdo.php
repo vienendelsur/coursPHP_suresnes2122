@@ -21,6 +21,7 @@
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre 06 - 01 PDO</h1>
       <p class="lead">Connexion à notre BDD avec PDO</p>
@@ -51,8 +52,8 @@
           // connexion à la BDD
             $pdoENT = new PDO( 'mysql:host=localhost;dbname=entreprise',// hôte et nom de la BDD
             'root',// le pseudo 
-            '',// le mot de passe
-            // 'root',// le mdp pour MAC avec MAMP
+            // '',// le mot de passe
+            'root',// le mdp pour MAC avec MAMP
             array(
               PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,// pour afficher les erreurs SQL dans le navigateur
               PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',// pour définir le charset des échanges avec la BDD
