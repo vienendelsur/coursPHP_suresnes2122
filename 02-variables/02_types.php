@@ -22,6 +22,7 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre 02 - 02 Types de données</h1>
       <p class="lead">Les types de données</p>

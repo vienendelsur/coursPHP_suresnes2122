@@ -21,6 +21,7 @@
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre 03 - 02 Boucles</h1>
       <p class="lead">Les boucles permettent de répéter des opérations élémentaires sans avoir à réécrire le même code</p>

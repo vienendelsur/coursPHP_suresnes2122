@@ -26,6 +26,7 @@ require_once '../inc/functions.php'; // APPEL DES FONCTIONS
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Mon compte : Patrick Isola</h1>
       <p class="lead">SOUS TITRE</p>

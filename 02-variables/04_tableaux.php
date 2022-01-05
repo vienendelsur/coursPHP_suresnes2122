@@ -21,6 +21,7 @@
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre - 04 tableaux</h1>
       <p class="lead">Les tableaux représentent un type composé car ils permettent de stocker sous un même nom de variable plusieurs valeurs indépendantes. C’est comme un tiroir divisé en compartiments. Chaque compartiment, que nous nommerons un élément du tableau, est repéré par un indice numérique (le premier ayant par défaut la valeur 0 et non 1). D’où l’expression de "tableau indicé".</p>

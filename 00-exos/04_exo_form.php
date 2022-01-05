@@ -21,6 +21,7 @@
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Exo - Form</h1>
       <p class="lead">Exercice traitement d'un formulaire</p>

@@ -1,5 +1,47 @@
 /* styles pour le cours PHP 21/22 Suresnes Pisola  */
 
+:root {
+    --bs-blue: #0d6efd;
+    --bs-indigo: #6610f2;
+    --bs-purple: #6f42c1;
+    --bs-pink: #d63384;
+    --bs-red: #dc3545;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #ffc107;
+    --bs-green: #198754;
+    --bs-teal: #20c997;
+    --bs-cyan: #0dcaf0;
+    --bs-white: #fff;
+    --bs-gray: #6c757d;
+    --bs-gray-dark: #343a40;
+    --bs-primary: #0d6efd;
+    --bs-secondary: #6c757d;
+    --bs-success: #198754;
+    --bs-info: #0dcaf0;
+    --bs-warning: #ffc107;
+    --bs-danger: #dc3545;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  }
+  
+  /*classe de couleurs  */
+  .bg-cyan {
+      background-color: var(--bs-cyan);
+  }
+
+  .bg-gray-dark {
+      background-color: var(--bs-gray-dark);
+  }
+  .bg-teal {
+      background-color: var(--bs-teal);
+  }
+
+  .bg-yellow {
+      background-color: var(--bs-yellow);
+  }
 
 /* font-family: 'Merriweather', serif;
 font-family: 'Montserrat', sans-serif; */
@@ -7,16 +49,23 @@ font-family: 'Montserrat', sans-serif; */
 body {
     font-family: 'Merriweather', serif;
     font-size: 1em;
-    background-image: url(../img/special-delivery.jpg);
+    background-image: url(../img/isometropolis.jpg);
     background-repeat: repeat;
 }
 
-body  header {
+main {
+    background-color: rgba(255, 255, 255, 0.534);
+}
+body header {
     margin-top: 60px;
 }
 
 .f-header {
     background-color: rgba(255, 255, 255, 0.9);
+}
+
+nav {
+    font-family: 'Montserrat', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -25,4 +74,8 @@ h1, h2, h3, h4, h5, h6 {
 
 h2 {
     font-size: 1.8em;
+}
+
+code {
+    background-color: #fff;
 }

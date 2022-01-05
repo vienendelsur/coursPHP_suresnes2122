@@ -21,6 +21,7 @@
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre - 03 Conditions</h1>
       <p class="lead">Les instructions conditionnelles ou les conditions : Indispensables à la gestion du déroulement d’un algorithme quelconque, ces instructions sont présentes dans tous les langages. Cela sera familier pour ceux qui ont déjà pratiqué un langage tel que le JavaScript.</p>

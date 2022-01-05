@@ -20,6 +20,7 @@
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre - 2 les chaînes  de caractères</h1>
       <p class="lead">Les chaînes de caractères sont avec les nombres et les types de données les plus manipulés sur un site web. De surcroît, dans les échanges entre le client et le serveur au moyen de formulaires, toutes les données sont transmises sous forme de chaînes, d’où leur importance.</p>

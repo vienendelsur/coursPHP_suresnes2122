@@ -21,6 +21,7 @@
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre 05 - 01 POST</h1>
       <p class="lead">$_POST[] permet de récupérer les données saisies dans un formulaire</p>

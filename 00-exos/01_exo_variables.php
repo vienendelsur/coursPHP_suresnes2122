@@ -27,6 +27,7 @@ $frat = "Fraternité";
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
   <header class="container-fluid f-header p-2">
         <h1>CoursPHP - Chapitre - Exo 01 Variables</h1>
     </header> 

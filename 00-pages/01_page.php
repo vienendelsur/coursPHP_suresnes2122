@@ -11,6 +11,7 @@
     <?php echo "<title>Une page PHP</title>"; ?>
 </head>
 <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <?php 
         // affichage du contenu de la variable1
         echo "<h1> Suresnes 2021 - $variable1 </h1>";

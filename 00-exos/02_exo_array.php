@@ -15,6 +15,7 @@
 
   </head>
   <body>
+  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
   <header class="container-fluid">
         <h1 class="display-4 text-center">CoursPHP - Exo 02 Array</h1>
     </header> 
