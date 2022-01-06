@@ -26,7 +26,6 @@ require_once '../inc/functions.php';
   </head>
   <body>
   <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
-  <?php require_once '../inc/navbar.inc.php'; // NAV BAR TOP ?>  
     <main>
       <header class="container-fluid f-header p-2">
         <h1 class="display-4 text-center">CoursPHP - Chapitre 06 - 01 PDO</h1>
@@ -236,8 +235,88 @@ require_once '../inc/functions.php';
                 }
               ?> 
               </table>
-                <!-- JEUDI 5 reprendre ici -->
+                
               <hr>
+
+              <?php
+                $resultat = $pdoENT->query( " SELECT * FROM employes ORDER BY id_employes " );
+                $nombre_employes = $resultat->rowCount();
+                // debug($nombre_employes);
+                echo '<h5 class="bg-cyan">Il y a' .$nombre_employes. ' collaborateurs dans l\'entreprise</h5>';
+                // les lignes d'en-tête du tableau 
+                echo '<table class="table table-striped table-dark">';
+                echo '<thead><tr>';
+                echo '<th>ID</th>';
+                echo '<th>Nom</th>';
+                echo '<th>Prénom</th>';
+                echo '<th>Sexe</th>';
+                echo '<th>Service</th>';
+                echo '<th>Date d\'embauche</th>';
+                echo '<th>Salaire</th>';
+                echo '</tr></thead>';
+                echo '<tbody>';
+
+                // boucle while avec foreach
+                while ( $employe = $resultat->fetch( PDO::FETCH_ASSOC ) ) {
+                  echo '<tr>';
+                  foreach ( $employe as $informations ) {
+                    echo '<td>' .$informations. '</td>';
+                  }
+                  echo '</tr>';
+                }
+                echo '</tbody></table>';
+              ?>
+          </div>
+        <!-- fin col -->
+        </section>
+        <!-- fin row -->
+
+        <section class="row p-2">
+          <div class="col-md-10 bg-cyan">
+            <h2>5- Faire des requêtes préparées avec <code>prepare()</code></h2>
+            <p>Les requêtes préparées sont préconisées si vous exécutez plusieurs fois la même requête : cela fait gagner du temps</p>
+            <p>Elles permettent de "nettoyer" les données et de se prémunir des injections de type SQL qui sont des tentatives de piratages cf. chapitre 09 </p>
+            <p>Une requête préparée se réalise en 3 étapes</p>
+
+            <?php             
+                $nom = 'Blanchet'; // on cherche 1 seul résultat
+                $resultat = $pdoENT->prepare( " SELECT * FROM employes WHERE nom = :nom ");// 1 on prépare la requête sans l'exécuter :nom est un marqueur qui est vide pour le moment
+                $resultat->bindParam( ':nom', $nom );// 2 on lie le marqueur on fait la liaison entre le marqueur et la variable, dans les paramètres de bindParam 
+                $resultat->execute();// 3 on execute la requête
+                $employe = $resultat->fetch ( PDO::FETCH_ASSOC );
+                // debug($employe);
+                echo '<p>' .$employe['nom']. ' ' .$employe['prenom']. ', ' .$employe['service']. '. Date d\'embauche : ' .$employe['date_embauche']. '</p>';
+                
+                echo '<hr>';
+
+                $sexe = 'm';// on cherche plus d'un résultat
+                $resultat = $pdoENT->prepare( " SELECT * FROM employes WHERE sexe = :sexe ");// 1 on prépare la requête
+                $resultat->bindParam( ':sexe', $sexe );// 2 on lie le marqueur
+                $resultat->execute();// 3 on execute la requête
+                $nombre_employes = $resultat->rowCount();
+                // debug($nombre_employes);
+                echo '<h4> Il y a ' .$nombre_employes. ' résultats </h4>';
+                while ( $informations = $resultat->fetch ( PDO::FETCH_ASSOC ) ) {
+                  // debug($informations);
+                  // echo $informations['nom'];
+                  echo '<p>' .$informations['nom']. ' ' .$informations['prenom']. ', ' .$informations['service']. '. Date d\'embauche : ' .$informations['date_embauche']. '</p>';
+                }
+
+                echo '<hr>';
+                // requete préparée sans bindParam()
+                $resultat = $pdoENT->prepare( " SELECT * FROM employes WHERE nom = :nom AND prenom = :prenom ");// 1 on prépare la requête
+                $resultat->execute(array(// 2 on execute la requête en fabriquant un tableau
+                  ':nom' => 'Blanchet', // on n'utilise pas bindParam les marqueurs nous servent à chercher l'information
+                  ':prenom' => 'Laura'
+                ));
+                // debug($resultat);
+                $informations = $resultat->fetch ( PDO::FETCH_ASSOC );
+                // debug($informations); // on a l'enregistrement qui correspond à la requête
+                // echo $informations['nom'];
+                echo '<p class="bg-white">' .$informations['nom']. ' ' .$informations['prenom']. ', ' .$informations['service']. '. Date d\'embauche : ' .$informations['date_embauche']. '</p>';
+
+            ?>
+
           </div>
         <!-- fin col -->
         </section>
