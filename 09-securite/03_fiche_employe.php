@@ -15,6 +15,8 @@ $pdoENT = new PDO( 'mysql:host=localhost;dbname=entreprise',// hôte nom BDD
               // debug(get_class_methods($pdoENT));
 
               debug($_GET);
+              // if (isset($_GET['id_employes'])) {
+              // }
 
 ?>
 <!doctype html>
