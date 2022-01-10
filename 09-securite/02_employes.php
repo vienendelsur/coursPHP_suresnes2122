@@ -57,6 +57,7 @@ if ( !empty($_POST) ) {
     <link rel="stylesheet" href="../css/style.css">
   </head>
   <body> 
+    <?php require_once '../inc/navbar.inc.php';// NAVBAR ?>
   <main>
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre 09 - 02 employé</h1>
