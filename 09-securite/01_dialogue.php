@@ -16,23 +16,24 @@ $pdoDIA = new PDO( 'mysql:host=localhost;dbname=dialogue',// hôte nom BDD
               // debug(get_class_methods($pdoDIA));
 
 //  TRAITEMENT DU FORMULAIRE (version basique et non sécurisée)
-if ( !empty( $_POST )) {
-	debug($_POST);
-	$insertion = $pdoDIA->query( " INSERT INTO commentaires (pseudo, date_enregistrement, message) VALUES ( '$_POST[pseudo]', NOW(), '$_POST[message]' ) " );
-}
-
-// 3 TRAITEMENT DU FORMULAIRE
-// if ( !empty( $_POST )) {// est-ce que $_POST n'est pas vide
-// 	$_POST['pseudo'] = htmlspecialchars($_POST['pseudo']);// pour se prémunir des failles et des injections SQL
-// 	$_POST['message'] = htmlspecialchars($_POST['message']);
-
-// 	$insertion = $pdoDIA->prepare( " INSERT INTO commentaires (pseudo, message, date_enregistrement) VALUES (:pseudo, :message, NOW()) ");// requete préparée avec des marqueurs
-
-// 	$insertion->execute( array(
-// 		':pseudo' => $_POST['pseudo'],
-// 		':message' => $_POST['message'],
-// 	));
+// ok');DELETE FROM commentaires;( requeête mailveillante à insérer, en dernier la requête SQL
+// if ( !empty( $_POST )) {
+// 	debug($_POST);
+// 	$insertion = $pdoDIA->query( " INSERT INTO commentaires (pseudo, date_enregistrement, message) VALUES ( '$_POST[pseudo]', NOW(), '$_POST[message]' ) " );
 // }
+
+// 3 TRAITEMENT DU FORMULAIRE SÉCURISÉ AVEC UNE REQUÊTE PRÉPARÉE
+if ( !empty( $_POST )) {// est-ce que $_POST n'est pas vide
+	$_POST['pseudo'] = htmlspecialchars($_POST['pseudo']);// pour se prémunir des failles et des injections SQL
+	$_POST['message'] = htmlspecialchars($_POST['message']);
+
+	$insertion = $pdoDIA->prepare( " INSERT INTO commentaires (pseudo, message, date_enregistrement) VALUES (:pseudo, :message, NOW()) " );// requete préparée avec des marqueurs
+
+	$insertion->execute( array(
+		':pseudo' => $_POST['pseudo'],
+		':message' => $_POST['message'],
+	));
+}
 
 ?>
 <!doctype html>
@@ -112,6 +113,7 @@ if ( !empty( $_POST )) {
                  <th>Pseudo</th>
                  <th>Message</th>
                  <th>Date d'enregistrement</th>
+                 <th>Modif</th>
                </tr>
              </thead>
              <tbody>
@@ -122,6 +124,7 @@ if ( !empty( $_POST )) {
 				   <td><?php echo $commentaire['pseudo']; ?></td>
 				   <td><?php echo $commentaire['message']; ?></td>
 				   <td><?php echo $commentaire['date_enregistrement']; ?></td>
+           <td><a href="01_fiche_dialogue.php?id_commentaires=<?php echo $commentaire['id_commentaires']; ?>">maj</a></td>
 			   </tr>
 			   <!-- fermeture de la boucle -->
 			   <?php } ?>

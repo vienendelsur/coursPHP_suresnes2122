@@ -15,9 +15,9 @@ $pdoENT = new PDO( 'mysql:host=localhost;dbname=entreprise',// hôte nom BDD
               // debug(get_class_methods($pdoENT));
 
 // 3 TRAITEMENT DU FORMULAIRE
-if (!empty($_POST)) {
+if ( !empty($_POST) ) {
     // debug($_POST);
-    $_POST['prenom'] = htmlspecialchars($_POST['prenom']);// pour se prémunir des failles et des injections SQL
+  $_POST['prenom'] = htmlspecialchars($_POST['prenom']);// pour se prémunir des failles et des injections SQL
 	$_POST['nom'] = htmlspecialchars($_POST['nom']);
 	$_POST['sexe'] = htmlspecialchars($_POST['sexe']);
 	$_POST['service'] = htmlspecialchars($_POST['service']);
@@ -61,17 +61,18 @@ if (!empty($_POST)) {
     <header class="container-fluid f-header p-2">
       <h1 class="display-4 text-center">CoursPHP - Chapitre 09 - 02 employé</h1>
       <p class="lead">les employés de l'entreprise</p>
+    <?php whatDay(); ?>
     </header> 
     <!-- fin container-fluid header  -->
       <div class="container bg-white mt-2 mb-2 m-auto p-2">
   
         <section class="row">
   
-          <div class="col-md-6">
+          <div class="col-md-8">
             <h2>les employés</h2>
             <?php
 			// 3 affichage de données 
-              $requete = $pdoENT->query( " SELECT * FROM employes ORDER BY id_employes DESC  " );
+              $requete = $pdoENT->query( " SELECT * FROM employes ORDER BY id_employes DESC " );
               // debug($resultat);
               $nbr_employes = $requete->rowCount();
               // debug($nbr_commentaires);
@@ -100,7 +101,7 @@ if (!empty($_POST)) {
 				   <td><?php echo $ligne['service']; ?></td>
 				   <td><?php echo $ligne['salaire']; ?></td>
 				   <td><?php echo $ligne['date_embauche']; ?></td>
-                   <td><a href="03_fiche_employe.php?id_employe=<?php echo $ligne['id_employes']; ?>">Fiche</a></td>
+          <td><a href="03_fiche_employe.php?id_employes=<?php echo $ligne['id_employes']; ?>">maj</a></td>
 			   </tr>
 			   <!-- fermeture de la boucle -->
 			   <?php } ?>
@@ -109,7 +110,7 @@ if (!empty($_POST)) {
           </div>
           <!-- fin col -->
   
-          <div class="col-md-6">
+          <div class="col-md-4">
             <h2>Nouvel employé</h2>
             <!-- action vide car nous envoyons les données avec cette même page et POST va envoyer dans la superglobale $_POST -->
 			<form action="" method="POST" class="border border-primary p-1">
