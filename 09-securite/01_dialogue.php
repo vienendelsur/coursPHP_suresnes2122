@@ -16,23 +16,23 @@ $pdoDIA = new PDO( 'mysql:host=localhost;dbname=dialogue',// hôte nom BDD
               // debug(get_class_methods($pdoDIA));
 
 //  TRAITEMENT DU FORMULAIRE (version basique et non sécurisée)
-// if ( !empty( $_POST )) {
-// 	// debug($_POST);
-// 	$insertion = $pdoDIA->query( " INSERT INTO commentaires (pseudo, message, date_enregistrement) VALUES ( '$_POST[pseudo]', '$_POST[message]', NOW()) " );
-// }
+if ( !empty( $_POST )) {
+	debug($_POST);
+	$insertion = $pdoDIA->query( " INSERT INTO commentaires (pseudo, date_enregistrement, message) VALUES ( '$_POST[pseudo]', NOW(), '$_POST[message]' ) " );
+}
 
 // 3 TRAITEMENT DU FORMULAIRE
-if ( !empty( $_POST )) {// est-ce que $_POST n'est pas vide
-	$_POST['pseudo'] = htmlspecialchars($_POST['pseudo']);// pour se prémunir des failles et des injections SQL
-	$_POST['message'] = htmlspecialchars($_POST['message']);
+// if ( !empty( $_POST )) {// est-ce que $_POST n'est pas vide
+// 	$_POST['pseudo'] = htmlspecialchars($_POST['pseudo']);// pour se prémunir des failles et des injections SQL
+// 	$_POST['message'] = htmlspecialchars($_POST['message']);
 
-	$insertion = $pdoDIA->prepare( " INSERT INTO commentaires (pseudo, message, date_enregistrement) VALUES (:pseudo, :message, NOW()) ");// requete préparée avec des marqueurs
+// 	$insertion = $pdoDIA->prepare( " INSERT INTO commentaires (pseudo, message, date_enregistrement) VALUES (:pseudo, :message, NOW()) ");// requete préparée avec des marqueurs
 
-	$insertion->execute( array(
-		':pseudo' => $_POST['pseudo'],
-		':message' => $_POST['message'],
-	));
-}
+// 	$insertion->execute( array(
+// 		':pseudo' => $_POST['pseudo'],
+// 		':message' => $_POST['message'],
+// 	));
+// }
 
 ?>
 <!doctype html>
