@@ -5,8 +5,8 @@ require_once '../inc/functions.php';
 // 2 CONNEXION BDD
 $pdoENT = new PDO( 'mysql:host=localhost;dbname=entreprise',// hôte nom BDD
               'root',// pseudo 
-              // '',// mot de passe
-              'root',// mdp pour MAC avec MAMP
+              '',// mot de passe
+              // 'root',// mdp pour MAC avec MAMP
               array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,// afficher les erreurs SQL dans le navigateur
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',// charset des échanges avec la BDD
