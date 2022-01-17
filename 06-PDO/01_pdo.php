@@ -89,6 +89,7 @@ require_once '../inc/functions.php';
               // debug($requete);
               // echo "Dernier id généré en BDD : " .$pdoENT->lastInsertId();
               // $requete = $pdoENT->exec( " UPDATE employes SET nom='COCO' WHERE nom='Saisrien' " );
+              $coucou  = 'je fais coucou';
             ?> 
           </div>
           <!-- fin col -->
@@ -321,6 +322,12 @@ require_once '../inc/functions.php';
         <!-- fin col -->
         </section>
         <!-- fin row -->
+
+        <section class="row bg-cyan text-white">
+          <col-12>
+            <?php debug($GLOBALS); ?>      
+          </col-12>
+        </section>
   
       </div>
       <!-- fin container  -->
