@@ -47,3 +47,5 @@ public (enum 'm', 'f', 'mixte')
 photo
 prix
 stock
+
+donner schéma BDD
