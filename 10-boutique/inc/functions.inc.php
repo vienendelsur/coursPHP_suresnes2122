@@ -7,7 +7,22 @@ function debug($mavar) {// la fonction avec son paramètre, une variable
     echo "</pre>";
 }
 
-// FONCTION REQUETE PRÉPARÉE
+//2- FONCTION POUR EXÉCUTER LES REQUETES PRÉPARÉES
+function executeRequete($requete, $parametres = array()) {  
+    foreach ($parametres as $indice => $valeur) {
+        $parametres[$indice] = htmlspecialchars($valeur);
+        global $pdoMAB;
+
+        $resultat = $pdoMAB->prepare($requete);
+        $succes = $resultat->execute($parametres);
+
+        if ($succes === false ) {
+            return false;
+        } else {
+            return $resultat;
+        }// fin if else
+    }// fin foreach
+}// fin fonction
 
 // FONCTION POUR VÉRIFIER QUE LE MEMBRE EST CONNECTÉ
 

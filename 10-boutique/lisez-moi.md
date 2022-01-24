@@ -49,3 +49,6 @@ prix
 stock
 
 donner schéma BDD
+
+PAGE INSCRIPTION 
+faire un formulaire qui servira à l'inscription d'un utilisateur 
