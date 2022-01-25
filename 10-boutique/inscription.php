@@ -63,6 +63,12 @@ if ( !empty($_POST) ) {
                 ':code_postal' => $_POST['code_postal'],
                 ':ville' => $_POST['ville'],
             ));
+            debug($succes);
+            if ($succes) {
+                $contenu .='<div class="alert alert-success">Vous êtes bien inscrit à La Boutique !</div>';
+            } else {
+                $contenu .='<div class="alert alert-danger">Erreur lors de l\'inscription !</div>';
+            }
         }
     }
 }
@@ -84,11 +90,11 @@ if ( !empty($_POST) ) {
         <h1>Créez votre compte</h1>
    </header>
 
-   <div class="container">
+   <div class="container"><?php echo $contenu; ?>
         <section class="row m-4 justify-content-center">
              
             <div class="col-md-6 p-2 bg-light border border-primary">
-                <?php echo $contenu; ?>
+                
                 <form action="" method="POST">
                 <div class="form-group mt-2">
                     <label for="civilite">Civilité *</label>
