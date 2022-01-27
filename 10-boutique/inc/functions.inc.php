@@ -24,7 +24,22 @@ function executeRequete($requete, $parametres = array()) {  // utile pour toutes
     }// fin foreach
 }// fin fonction
 
-// FONCTION POUR VÉRIFIER QUE LE MEMBRE EST CONNECTÉ
+//3- FONCTION POUR VÉRIFIER QUE LE MEMBRE EST CONNECTÉ
+function estConnecte() {
+    if (isset($_SESSION['membre'])) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
-// FONCTION POUR VÉRIFIER QUE LE MEMBRE EST ADMIN
+//4- FONCTION POUR VÉRIFIER QUE LE MEMBRE EST ADMIN
+function estAdmin() { 
+    if ( estConnecte() && $_SESSION['membre']['statut'] == 1 ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ?>

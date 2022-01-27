@@ -2,7 +2,7 @@
 // require connexion, session etc.
 require_once 'inc/init.inc.php';
 
-// debug($_SESSION);
+debug($_SESSION);
 // debug(strlen(' ma grand mère fait du vélo plus vite que moi '));
 
 if ( !empty($_POST) ) {
