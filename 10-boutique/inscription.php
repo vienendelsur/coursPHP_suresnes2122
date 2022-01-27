@@ -94,7 +94,8 @@ if ( !empty($_POST) ) {
   </head>
   <body class="m-2">
    <header class="container bg-primary text-white p-4 ">
-        <h1>Créez votre compte</h1>
+        <h1 class="display-4">Créez votre compte</h1>
+        <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti amet qui accusantium reprehenderit placeat! Officiis laborum voluptatum incidunt, iure enim, tempore aperiam necessitatibus rerum ipsam, blanditiis sunt voluptates neque ex?</p>
    </header>
 
    <div class="container"><?php echo $contenu; ?>

@@ -24,7 +24,7 @@ session_start();
 
 //3- CHEMIN DU SITE DANS UNE CONSTANTE
 
-//4- UNE VARIABLE POUR LES MESSAGES
+//4- UNE VARIABLE POUR LES MESSAGES ATTENTION ne pas mettre d'espace dans la variable !
 $contenu = '';
 
 //5- INCLUSION DES FONCTIONS
