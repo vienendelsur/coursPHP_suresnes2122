@@ -1,15 +1,23 @@
 <?php 
-// POUR SE CONNECTER ET SE DECONNECTER
-
+// 1- POUR SE CONNECTER ET SE DECONNECTER
 require_once 'inc/init.inc.php';
-
-// debug($_SESSION);
+debug($_SESSION);
 
 // 2- DÉCONNEXION DU MEMBRE
-
+// debug($_GET);
+$message = '';
+if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') { // si il existe action qui contient 'deconnexion' dans l'url
+    unset($_SESSION['membre']);// on supprime le membre de la session (le contenu du tableau indice membre)
+    $message = '<div class="alert alert-success">Vous êtes déconnecté</div>';// message de déconnexion cf echo plus bas
+    debug($_SESSION);
+}
 // 3- REDIRECTION VERS LA PAGE PROFIL
+if (estConnecte()) { // si le membre est connecté on le renvoi vers le profil
+    header('location:profil.php');// header() est une fonction prédéfinie qui va nous rediriger vers la page souhaitée (ici profil.php)
+    exit();
+}
 
-// 1- TRAITEMENT DU FORMULAIRE DE CONNEXION
+// 4- TRAITEMENT DU FORMULAIRE DE CONNEXION
 
 // debug($_POST);
 if ( !empty( $_POST ) ) {
@@ -72,7 +80,9 @@ if ( !empty( $_POST ) ) {
         <p class="lead">Rentrez vos identifiants pour vous connecter</p>
    </header>
    <div class="container">      
-        <section class="row m-4 justify-content-center">            
+        <section class="row m-4 justify-content-center">
+            
+        <?php echo $message; ?>            
             <div class="col-md-4 p-2 bg-light border border-primary">
                 <p class="lead">Rentrez vos identifiants pour vous connecter</p> 
                 <!-- 1- FORMULAIRE DE CONNEXION   -->

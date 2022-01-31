@@ -2,9 +2,11 @@
 // require connexion, session etc.
 require_once 'inc/init.inc.php';
 
-// debug($_SESSION);
+debug($_SESSION);
 // debug(estConnecte());
 // debug(estAdmin());
+
+// debug(RACINE_SITE);
 
 if (!estConnecte()) { // accès à la page autorisé quand on est connecté
     header('location:connexion.php');
@@ -23,23 +25,51 @@ if (!estConnecte()) { // accès à la page autorisé quand on est connecté
     <title>La boutique - Bienvenue </title>
   </head>
 <body>
-    <header class="container bg-primary text-white p-4 ">
-            <h1 class="display-4">Profil </h1>
-            <p class="lead">Bonjour <?php echo $_SESSION['membre']['prenom']; ?></p>
+    <header class="container bg-warning p-4 ">
+            <h1 class="display-4">Votre profil </h1>
+            <p class="lead">Bonjour <?php echo $_SESSION['membre']['prenom']; ?>
+            <?php
+            if(estAdmin()) { // si le membre est 'admin' il n'a pas les mêmes accès qu'un membre 'client'
+                echo ' -- Vous êtes administrateur</p>';
+            } else {
+                echo ' -- Vous êtes connecté rendez-vous à la Boutique</p>';
+            }
+            ?>
+
+            <ul class="nav nav-pills nav-fill">
+            <?php 
+                if(estAdmin()) { // si le membre est 'admin' il n'a pas les mêmes accès qu'un membre 'client'
+                    echo '<li class="nav-item"><a class="btn btn-primary" href="' .RACINE_SITE. 'admin/accueil.php">Espace admin</a></li>';
+                    echo '<li class="nav-item"><a class="btn btn-success" href="' .RACINE_SITE. 'accueil.php">Aller à la boutique</a></li>';
+                } else {
+                    echo '<li class="nav-item"><a class="btn btn-success" href="accueil.php">Retour à la boutique</a></li>';
+                }
+                if (estConnecte()) {
+                    //  echo 'coucou';
+                    echo '<li class="nav-item"><a class="btn btn-secondary" href="' .RACINE_SITE. 'connexion.php?action=deconnexion">Se déconnecter</a></li>';
+                }
+            ?>
+            </ul>
     </header>
+    <div class="container">
+    <section class="row m-3 justify-content-center">
+        <div class="col-md-4 bg-light">
+            <div class="card" style="width: 18rem;">
+                <img src="photos/" class="card-img-top img-fluid" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title"><?php echo $_SESSION['membre']['prenom']. ' ' .$_SESSION['membre']['nom']; ?></h5>
+                    <p class="card-text"><?php echo $_SESSION['membre']['email']; ?></p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
 
-    <?php 
-     if(estAdmin()) {
-         echo '<p>Vous êtes administrateur</p>';
-         echo '<a class="btn btn-primary" href="admin/index.php">Espace admin</a>';
-     } else {
-         echo '<p>Vous êtes connecté rendez-vous à la Boutique</p>';
-         echo '<a class="btn btn-success" href="accueil.php">Retour à la boutique</a>';
-     }
-     if (estConnecte()) {
-
-     }
-    ?>
+        <div class="col-md-8">
+                
+        </div>
+    <a href="profil.php"></a>
+    </section>
+    </div>
    
 </body>
 </html>

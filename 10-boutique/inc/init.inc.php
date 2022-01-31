@@ -23,6 +23,11 @@ array(
 session_start();
 
 //3- CHEMIN DU SITE DANS UNE CONSTANTE
+// ici on définit le chemin absolu dans une constante, on écrira tous les chemins src et href avec cette constante
+// chez l'hébergeur on écrira ce qui suit
+// define('RACINE_SITE', '/');
+define('RACINE_SITE', '/coursPHP_suresnes2122/10-boutique/');
+
 
 //4- UNE VARIABLE POUR LES MESSAGES ATTENTION ne pas mettre d'espace dans la variable !
 $contenu = '';
