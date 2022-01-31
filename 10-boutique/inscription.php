@@ -130,7 +130,6 @@ if ( !empty($_POST) ) {
             <div class="form-group mt-2">
                 <label for="mdp">Mot de passe *</label>
                 <input type="password" name="mdp" id="mdp" value="" class="form-control">
-                <small class="bg-warning p-1">Votre mot de passe doit contenir entre 4 et 20 caractères</small>
             </div>
             <div class="form-group mt-2">
                 <label for="adresse">Adresse</label>

@@ -2,11 +2,15 @@
 // require connexion, session etc.
 require_once 'inc/init.inc.php';
 
-debug($_SESSION);
-debug(estConnecte());
-debug(estAdmin());
-?> 
+// debug($_SESSION);
+// debug(estConnecte());
+// debug(estAdmin());
 
+if (!estConnecte()) { // accès à la page autorisé quand on est connecté
+    header('location:connexion.php');
+}
+
+?> 
 <!DOCTYPE html>
 <html lang="fr">
 <!-- Required meta tags -->
@@ -27,8 +31,13 @@ debug(estAdmin());
     <?php 
      if(estAdmin()) {
          echo '<p>Vous êtes administrateur</p>';
+         echo '<a class="btn btn-primary" href="admin/index.php">Espace admin</a>';
      } else {
          echo '<p>Vous êtes connecté rendez-vous à la Boutique</p>';
+         echo '<a class="btn btn-success" href="accueil.php">Retour à la boutique</a>';
+     }
+     if (estConnecte()) {
+
      }
     ?>
    

@@ -1,8 +1,9 @@
 <?php 
-// require connexion, session etc.
+// POUR SE CONNECTER ET SE DECONNECTER
+
 require_once 'inc/init.inc.php';
 
-debug($_SESSION);
+// debug($_SESSION);
 
 // 2- DÉCONNEXION DU MEMBRE
 
@@ -12,37 +13,41 @@ debug($_SESSION);
 
 // debug($_POST);
 if ( !empty( $_POST ) ) {
+
+    // if (empty($_POST['pseudo']) || empty($_POST['mdp']) ) { // OU
+        // $contenu .='<div class="alert alert-warning">Le pseudo ou le mdp sont requis !</div>';
+    // }
+
     if (empty($_POST['pseudo'])) { // si c'est vide = 0 ou NULL c'est false 
         $contenu .='<div class="alert alert-warning">Le pseudo est requis !</div>';
     }
 
-    if (empty($_POST['mdp'])) {
+    if (empty($_POST['mdp'])) { // si mdp vide
         $contenu .='<div class="alert alert-warning">Le mdp est requis !</div>';
     }
 
-    if (empty($contenu)) {
-        $resultat = executeRequete( " SELECT * FROM membres WHERE pseudo = :pseudo ", 
+    if (empty($contenu)) { // si la variable $contenu est vide pas d'erreurs
+        $resultat = executeRequete( " SELECT * FROM membres WHERE pseudo = :pseudo ", // on cherche le membre avec son pseudo unique
                         array(
                             ':pseudo' => $_POST['pseudo'],
-                            // ':mdp' => $_POST['mdp'],
                         ));
 
-        if ( $resultat->rowCount() == 1 )  {
+        if ( $resultat->rowCount() == 1 )  { // si il y a une ligne c'est qu'il y a ce pseudo et ce membre
             $membre = $resultat->fetch( PDO::FETCH_ASSOC ); 
             debug($membre);
 
-            if ( password_verify($_POST['mdp'], $membre['mdp'])) {
-                // echo 'coucou le membre';
-                $_SESSION['membre'] = $membre;
-                // debug($_SESSION);
-                header( 'location:profil.php' );// VOIR
-                exit();
-            } else {
+                if ( password_verify($_POST['mdp'], $membre['mdp'])) { // si le hash du mdp de la bdd correspond au mdp du formulaire, alors password_verify retourne true
+                    // echo 'coucou le membre';
+                    $_SESSION['membre'] = $membre; // nous créons une session avec les infos du membre, dans un tableau multidimesionnel
+                    // debug($_SESSION);
+                    header( 'location:profil.php' );// on redirige le membre vers la page profil
+                    exit();
+                } else {
+                    $contenu .='<div class="alert alert-danger">Erreur sur les identifiants !</div>';
+                }
+            }  else {
                 $contenu .='<div class="alert alert-danger">Erreur sur les identifiants !</div>';
-            }
-        }  else {
-            $contenu .='<div class="alert alert-danger">Erreur sur les identifiants !</div>';
-        } 
+        } // fin if $resultat
         
     }//fin if empty $contenu
 
