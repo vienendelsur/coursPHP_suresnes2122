@@ -1,5 +1,4 @@
 <?php 
-
 require_once 'inc/init.inc.php';
 
 ?> 
@@ -16,7 +15,7 @@ require_once 'inc/init.inc.php';
     <title>La boutique - Accueil</title>
   </head>
   <body class="m-2">
-   <header class="container bg-primary text-white p-4 ">
+   <header class="container bg-warning text-white p-4 ">
         <h1 class="display-4">La Boutique  </h1>
         <p class="lead">La Boutique, tout pour plaire</p>
    </header>

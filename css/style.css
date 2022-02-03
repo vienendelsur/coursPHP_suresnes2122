@@ -79,3 +79,9 @@ h2 {
 code {
     background-color: #fff;
 }
+
+/* pour les photos de l'admin  */
+
+img-admin {
+    max-width: 25%;
+}

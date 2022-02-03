@@ -2,7 +2,7 @@
 // require connexion, session etc.
 require_once 'inc/init.inc.php';
 
-debug($_SESSION);
+// debug($_SESSION);
 // debug(estConnecte());
 // debug(estAdmin());
 
@@ -69,7 +69,58 @@ if (!estConnecte()) { // accès à la page autorisé quand on est connecté
         </div>
 
         <div class="col-md-8">
-                
+        <form method="POST" action="" class="shadow p-3 mb-5 bg-body rounded">
+			<h2>Mise à jour de vos informations</h2>
+            <div class="row">
+              <div class="col-4 form-group mt-2">
+                  <label for="pseudo">Votre pseudo *</label>
+                  <input type="text" name="pseudo" id="pseudo" value="<?php echo $_SESSION['membre']['pseudo']; ?>" class="form-control"> 
+              </div>
+            </div>
+            <!-- <div class="form-group mt-2">
+                <label for="mdp">Mot de passe *</label>
+                <input type="password" name="mdp" id="mdp" value="" class="form-control">
+                <small class="bg-warning">votre mot de passe doit contenir entre 4 et 20 caractères</small>
+            </div> -->
+            <div class="row">
+              <div class="col-4 form-group mt-2">
+                  <label for="nom">Nom *</label>
+                  <input type="text" name="nom" id="nom" value="<?php echo $_SESSION['membre']['nom']; ?>" class="form-control">
+              </div>
+              <div class="col-4 form-group mt-2">
+                  <label for="prenom">Prénom *</label>
+                  <input type="text" name="prenom" id="prenom" value="<?php echo $_SESSION['membre']['prenom']; ?>" class="form-control"> 
+              </div>
+            <div class="col-4 form-group mt-2">
+                <label for="email">Email *</label>
+                <input type="email" name="email" id="email" value="<?php echo $_SESSION['membre']['email']; ?>" class="form-control">
+            </div>
+            </div>
+            <!-- fin row  -->
+            <div class="row">
+              <div class="form-group mt-2">
+                  <label for="civilite">Civilité *</label>
+                  
+                  <input type="radio" name="civilite" value="m" checked> Homme
+                  <input type="radio" name="civilite" value="f"<?php if (isset($_SESSION['membre']['civilite']) && $_SESSION['membre']['civilite'] =='f') echo 'checked';?>> Femme            
+              </div>
+              <div class="col-4 form-group mt-2">
+                  <label for="adresse">Adresse</label>
+                  <textarea name="adresse" id="adresse" class="form-control"><?php echo $_SESSION['membre']['adresse']; ?></textarea>
+              </div>
+              <div class="col-4 form-group mt-2">
+                  <label for="code_postal">Code postal</label>
+                  <input type="text" name="code_postal" id="code_postal" value="<?php echo $_SESSION['membre']['code_postal']; ?>" class="form-control"> 
+              </div>
+              <div class="col-4 form-group mt-2">        
+                  <label for="ville">Ville</label>
+                  <input type="text" name="ville" id="ville" value="<?php echo $_SESSION['membre']['ville']; ?>" class="form-control"> 
+              </div>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Mise à jour" class="btn btn-md btn-outline-success"> 
+            </div>
+    </form>
         </div>
     <a href="profil.php"></a>
     </section>
