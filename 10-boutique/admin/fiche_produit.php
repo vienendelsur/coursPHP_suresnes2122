@@ -6,54 +6,27 @@ if (!estAdmin()) { // accès non autorisé si on n'est pas admin (et pas connect
     header('location:../connexion.php');
 }
 
-// INSERTION D'UN PRODUIT 
-
-if (!empty($_POST)) {
-
-    //ici il faudrait faire 9 conditions pour vérifier que les champs du form sont bien remplis
-
-    $_POST['reference'] = htmlspecialchars($_POST['reference']);
-    $_POST['categorie'] = htmlspecialchars($_POST['categorie']);
-    $_POST['titre'] = htmlspecialchars($_POST['titre']);
-    $_POST['description'] = htmlspecialchars($_POST['description']);
-    $_POST['couleur'] = htmlspecialchars($_POST['couleur']);
-    $_POST['taille'] = htmlspecialchars($_POST['taille']);
-    $_POST['public'] = htmlspecialchars($_POST['public']);
-    $_POST['prix'] = htmlspecialchars($_POST['prix']);
-    $_POST['stock'] = htmlspecialchars($_POST['stock']);
-
-    debug($_POST);
-
-    debug($_FILES);
-    // traitement du fichier image, de la photo
-
-    $photo_bdd = '';
-    if (!empty($_FILES['photo']['name'])) {
-        $photo_bdd = 'photos/' .$_FILES['photo']['name'];
-        copy($_FILES['photo']['tmp_name'], '../' .$photo_bdd);
-    }//fin du traitement photo
-
-    $requete =  executeRequete( " INSERT INTO produits (reference, categorie, titre, description, couleur, taille, public, photo, prix, stock ) VALUES ( :reference, :categorie, :titre, :description, :couleur, :taille, :public, :photo, :prix, :stock ) ",
-    array(
-        ':reference' => $_POST['reference'],
-        ':categorie' => $_POST['categorie'],
-        ':titre' => $_POST['titre'],
-        ':description' => $_POST['description'],
-        ':couleur' => $_POST['couleur'],
-        ':taille' => $_POST['taille'],
-        ':public' => $_POST['public'],
-        ':photo' => $photo_bdd,
-        ':prix' => $_POST['prix'],
-        ':stock' => $_POST['stock'],
+// 3 RÉCEPTION DES INFORMATIONS D'UN PRODUIT AVEC $_GET
+// debug($_GET);
+if ( isset($_GET['id_produit']) ) {
+    // debug($_GET);
+    $resultat = $pdoMAB->prepare( " SELECT * FROM produits WHERE id_produit = :id_produit " );
+    $resultat->execute(array(
+      ':id_produit' => $_GET['id_produit']
     ));
+    // debug($resultat->rowCount());
+      if ($resultat->rowCount() == 0) { // si le rowCount est égal à 0 c'est qu'il n'y a pas de produit
+          header('location:accueil.php');// redirection vers la page de départ
+          exit();// arrêt du script
+      }  
+      $fiche = $resultat->fetch(PDO::FETCH_ASSOC);//je passe les infos dans une variable
+    //   debug($fiche);// ferme if isset accolade suivante
+      } else {
+      header('location:accueil.php');// si j'arrive sur la page sans rien dans l'url
+      exit();// arrête du script
+  }
 
-    if ($requete) {
-        $contenu .= '<div class="alert alert-success">Le produit a été enregistré.</div>';
-    } else {
-        $contenu .= '<div class="alert alert-danger">Erreur lors de l\'enregistrement...</div>';
-    }
 
-} // fin insertion nouveau produit
 
 ?> 
 <!doctype html>
@@ -71,35 +44,26 @@ if (!empty($_POST)) {
   <body class="m-2">
    <header class="container bg-primary text-white p-4 ">
         <h1 class="display-4">La Boutique - Administration</h1>
-        <p class="lead">La Boutique gestion des produits</p>
+        <p class="lead">La Boutique - gestion d'un produit</p>
    </header>
    <div class="container">      
         <section class="row m-4 justify-content-center">
-            <?php
-             $requete = $pdoMAB->query( " SELECT * FROM produits " );
-             $nbr_produits = $requete->rowCount();
-
-            ?>
-            <h2>Les produits : <?php echo $nbr_produits; ?></h2>           
-            <div class="col-md-6 p-2 bg-light border border-primary">
-                <table class=" table table-striped">
-            <?php
-             
-              while ( $ligne = $requete->fetch( PDO::FETCH_ASSOC )) { ?>
+            <h2>Le produit : <?php echo $fiche['titre']; ?></h2>           
+            <div class="col-md-8 p-2 bg-light border border-primary">
+                <table class="table table-striped">
                 <tr>
-                    <td> <img src="../<?php echo $ligne['photo']; ?>" class="figure-img img-fluid rounded img-admin"></td>
-                    <td> ID <?php echo $ligne['id_produit']; ?></td>
-                    <td>ref. <?php echo $ligne['reference']; ?></td>                   
-                    <td><?php echo $ligne['titre']. ' ' .$ligne['categorie']; ?></td>
-                    <td><?php echo $ligne['description']; ?></td>
-                    <td><?php echo $ligne['couleur']; ?></td>
-                    <td><?php echo $ligne['public']; ?></td>
-                    <td><?php echo $ligne['stock']; ?></td>
-           <td><a href="fiche_produit.php?id_produit=<?php echo $ligne['id_produit']; ?>">MAJ</a></td>
+                    <td> <img src="../<?php echo $fiche['photo']; ?>" class="figure-img img-fluid rounded img-admin"></td>
+                    <td> ID <?php echo $fiche['id_produit']; ?></td>
+                    <td>ref. <?php echo $fiche['reference']; ?></td>                   
+                    <td><?php echo $fiche['titre']. ' ' .$fiche['categorie']; ?></td>
+                    <td><?php echo $fiche['taille']; ?></td>
+                    <td><?php echo $fiche['description']; ?></td>
+                    <td><?php echo $fiche['couleur']; ?></td>
+                    <td><?php echo $fiche['public']; ?></td>
+                    <td><?php echo $fiche['prix']; ?> €</td>
+                    <td><?php echo $fiche['stock']; ?></td>
                 </tr>
                 <!-- fermeture de la boucle -->
-            <?php   } 
-            ?>
             </table>
             </div>
         <!-- fin col -->
@@ -114,7 +78,8 @@ if (!empty($_POST)) {
                     <!-- l'attribut entype spécifie que le formulaire envoie des fichiers en plus de données texte ; il va nous permettre de télécharger un fichier ici une photo -->
 
                     <label for="reference" class="form-label">Référence *</label>
-                    <input type="text" name="reference" id="reference" class="form-control">
+                    <!-- opérateur de coalescence ; si il n'y rien je mets une chaine vide  -->
+                    <input type="text" name="reference" id="reference" class="form-control" value="<?php echo $fiche['reference'] ?? 'qsdfgqsdf'; ?>">
 
                     <label for="categorie" class="form-label">Catégorie *</label>
                     <input type="text" name="categorie" id="categorie" class="form-control">
@@ -126,12 +91,14 @@ if (!empty($_POST)) {
                     <textarea name="description" id="description" cols="30" rows="3" class="form-control"></textarea>
 
                     <label for="couleur" class="form-label">Couleur *</label>
-                    <input type="text" name="couleur" id="couleur" class="form-control">
+                    <input type="text" name="couleur" id="couleur" class="form-control" value="<?php echo $fiche['couleur']; ?>">
 
                     <label for="taille" class="form-label">Taille *</label>
                     <select name="taille" id="taille" class="form-select">
+                    <option value="XS"<?php if (!strcmp("XS", $fiche['taille'])) { echo " selected"; }?>>Extra-small</option>
                         <option value="XS">Extra-small</option>
                         <option value="S">Small</option>
+                        <option value="M"<?php if (!strcmp("M", $fiche['taille'])) { echo " selected"; }?>>Medium</option>
                         <option value="M">Medium</option>
                         <option value="L">Large</option>
                         <option value="XL">Extra-large</option>
