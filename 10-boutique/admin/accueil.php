@@ -10,7 +10,44 @@ if (!estAdmin()) { // accès non autorisé si on n'est pas admin (et pas connect
 
 if (!empty($_POST)) {
 
-    //ici il faudrait faire 9 conditions pour vérifier que les champs du form sont bien remplis
+    // 9 conditions pour vérifier que les champs du form sont bien remplis
+    
+    if ( !isset($_POST['reference']) || strlen($_POST['reference']) < 5 || strlen($_POST['reference']) > 20) {
+        $contenu .='<div class="alert alert-warning">La référence : entre 5 et 20 caractères</div>';
+    }
+    if ( !isset($_POST['categorie']) || strlen($_POST['categorie']) < 2 || strlen($_POST['categorie']) > 20) {
+        $contenu .='<div class="alert alert-warning">Catégorie : entre 5 et 20 caractères</div>';
+    }
+
+    if ( !isset($_POST['titre']) || strlen($_POST['titre']) < 10 || strlen($_POST['titre']) > 100) {
+        $contenu .='<div class="alert alert-warning">Titre entre 10 et 100 caractères</div>';
+    }
+
+    if ( !isset($_POST['description']) || strlen($_POST['description']) < 4 || strlen($_POST['description']) > 20) {
+        $contenu .='<div class="alert alert-warning">Description incomplète !</div>';
+    }
+    if ( !isset($_POST['couleur']) || strlen($_POST['couleur']) < 4 || strlen($_POST['couleur']) > 20) {
+        $contenu .='<div class="alert alert-warning">Couleur : entre 4 et 20 caractères</div>';
+    }
+
+    if ( !isset($_POST['taille']) || strlen($_POST['taille']) < 1 || strlen($_POST['taille']) > 5) {
+        $contenu .='<div class="alert alert-warning">Taille : entre 1 et 5 caractères</div>';
+    }
+
+    if ( !isset($_POST['public']) || $_POST['public'] != 'm' && $_POST['public'] != 'f'  && $_POST['public'] != 'mixte' ) { // && ET
+        $contenu .='<div class="alert alert-warning">Public : non conforme !</div>';
+    }
+    if ( !isset($_POST['prix']) || strlen($_POST['prix']) < 1 || strlen($_POST['prix']) > 5 ) {
+        $contenu .='<div class="alert alert-warning">Prix : rentrez le prix de vente !</div>';
+    }
+
+    if ( !isset($_POST['stock']) ) {
+        $contenu .='<div class="alert alert-warning">Stock : rentrez la quantité !</div>';
+    }
+
+    if (empty($contenu)) {
+
+    
 
     $_POST['reference'] = htmlspecialchars($_POST['reference']);
     $_POST['categorie'] = htmlspecialchars($_POST['categorie']);
@@ -54,7 +91,7 @@ if (!empty($_POST)) {
     }
 
 } // fin insertion nouveau produit
-
+}
 ?> 
 <!doctype html>
 <html lang="fr">
@@ -94,6 +131,7 @@ if (!empty($_POST)) {
                     <td><?php echo $ligne['description']; ?></td>
                     <td><?php echo $ligne['couleur']; ?></td>
                     <td><?php echo $ligne['public']; ?></td>
+                    <td><?php echo $ligne['prix']; ?> Euros</td>
                     <td><?php echo $ligne['stock']; ?></td>
            <td><a href="fiche_produit.php?id_produit=<?php echo $ligne['id_produit']; ?>">MAJ</a></td>
                 </tr>
