@@ -133,7 +133,7 @@ if (!empty($_POST)) {
                     <td><?php echo $ligne['public']; ?></td>
                     <td><?php echo $ligne['prix']; ?> Euros</td>
                     <td><?php echo $ligne['stock']; ?></td>
-           <td><a href="fiche_produit.php?id_produit=<?php echo $ligne['id_produit']; ?>">MAJ</a></td>
+                    <td><a href="fiche_produit.php?id_produit=<?php echo $ligne['id_produit']; ?>">MAJ</a></td>
                 </tr>
                 <!-- fermeture de la boucle -->
             <?php   } 

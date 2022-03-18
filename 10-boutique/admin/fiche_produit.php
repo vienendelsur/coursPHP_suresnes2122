@@ -26,7 +26,33 @@ if ( isset($_GET['id_produit']) ) {
       exit();// arrête du script
   }
 
+//4 TRAITEMENT DE MISE À JOUR D'UN EMPLOYÉ
+if ( !empty($_POST) ) {//not empty
+  debug($_POST);
+$_POST['reference'] = htmlspecialchars($_POST['reference']);// pour se prémunir des failles et des injections SQL
+$_POST['categorie'] = htmlspecialchars($_POST['categorie']);
+$_POST['titre'] = htmlspecialchars($_POST['titre']);
+$_POST['description'] = htmlspecialchars($_POST['description']);
+$_POST['couleur'] = htmlspecialchars($_POST['couleur']);
+$_POST['taille'] = htmlspecialchars($_POST['taille']);
+$_POST['public'] = htmlspecialchars($_POST['public']);
+$_POST['public'] = htmlspecialchars($_POST['public']);
 
+$resultat = $pdoENT->prepare( " UPDATE produits SET reference = :reference, categorie = :categorie, titre = :titre, description = :description, couleur = :couleur, taille = :taille WHERE id_produit = :id_produit " );// requete préparée avec des marqueurs
+
+$resultat->execute( array(
+  ':prenom' => $_POST['prenom'],
+  ':nom' => $_POST['nom'],
+  ':sexe' => $_POST['sexe'],
+  ':service' => $_POST['service'],
+  ':date_embauche' => $_POST['date_embauche'],
+  ':salaire' => $_POST['salaire'],
+  ':id_employes' => $_GET['id_employes'],
+
+));
+header('location:02_employes.php');
+exit();
+}
 
 ?> 
 <!doctype html>
@@ -71,7 +97,7 @@ if ( isset($_GET['id_produit']) ) {
         <!-- fin row -->
 
         <section class="row m-4 justify-content-center"> 
-            <h2>Insertion d'un nouveau produit</h2>          
+            <h2>Mise à jour</h2>          
             <div class="col-md-8 p-2 bg-light border border-primary">
                 <?php echo $contenu; ?>
                 <form action="" method="POST" enctype="multipart/form-data" class="p-2">
@@ -79,19 +105,19 @@ if ( isset($_GET['id_produit']) ) {
 
                     <label for="reference" class="form-label">Référence *</label>
                     <!-- opérateur de coalescence ; si il n'y rien je mets une chaine vide  -->
-                    <input type="text" name="reference" id="reference" class="form-control" value="<?php echo $fiche['reference'] ?? 'qsdfgqsdf'; ?>">
+                    <input type="text" name="reference" id="reference" class="form-control" value="<?php echo $fiche['reference'] ?? ''; ?>">
 
                     <label for="categorie" class="form-label">Catégorie *</label>
-                    <input type="text" name="categorie" id="categorie" class="form-control">
+                    <input type="text" name="categorie" id="categorie" class="form-control" value="<?php echo $fiche['categorie'] ?? ''; ?>">
 
                     <label for="titre" class="form-label">Titre *</label>
-                    <input type="text" name="titre" id="titre" class="form-control">
+                    <input type="text" name="titre" id="titre" class="form-control" value="<?php echo $fiche['titre'] ?? ''; ?>">
 
                     <label for="description" class="form-label">Description *</label>
-                    <textarea name="description" id="description" cols="30" rows="3" class="form-control"></textarea>
+                    <textarea name="description" id="description" cols="30" rows="3" class="form-control"><?php echo $fiche['description'] ?? ''; ?></textarea>
 
                     <label for="couleur" class="form-label">Couleur *</label>
-                    <input type="text" name="couleur" id="couleur" class="form-control" value="<?php echo $fiche['couleur']; ?>">
+                    <input type="text" name="couleur" id="couleur" class="form-control" value="<?php echo $fiche['couleur'] ?? ''; ?>">
 
                     <label for="taille" class="form-label">Taille *</label>
                     <select name="taille" id="taille" class="form-select">
@@ -118,12 +144,12 @@ if ( isset($_GET['id_produit']) ) {
                     <!-- pour pouvoir utiliser le type="file" il FAUT ABSOLUMENT l'attribut enctype="multipart/form-data" dans la balise form-->
 
                     <label for="prix" class="form-label">Prix *</label>
-                    <input type="text" name="prix" id="prix" class="form-control">
+                    <input type="text" name="prix" id="prix" class="form-control" value="<?php echo $fiche['prix'] ?? ''; ?>">
 
                     <label for="stock" class="form-label">Stock *</label>
-                    <input type="text" name="stock" id="stock" class="form-control">
+                    <input type="text" name="stock" id="stock" class="form-control" value="<?php echo $fiche['stock'] ?? ''; ?>">
 
-                    <button class="btn btn-outline-success" type="submit">Ajouter un produit</button>
+                    <button class="btn btn-outline-success" type="submit">Mise à jour</button>
 
                 </form>
             </div>

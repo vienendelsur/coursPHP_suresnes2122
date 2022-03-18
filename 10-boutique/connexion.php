@@ -1,7 +1,7 @@
 <?php 
 // 1- POUR SE CONNECTER ET SE DECONNECTER
 require_once 'inc/init.inc.php';
-debug($_SESSION);
+// debug($_SESSION);
 
 // 2- DÉCONNEXION DU MEMBRE
 // debug($_GET);
@@ -9,7 +9,7 @@ $message = '';
 if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') { // si il existe action qui contient 'deconnexion' dans l'url
     unset($_SESSION['membre']);// on supprime le membre de la session (le contenu du tableau indice membre)
     $message = '<div class="alert alert-success">Vous êtes déconnecté</div>';// message de déconnexion cf echo plus bas
-    debug($_SESSION);
+    // debug($_SESSION);
 }
 // 3- REDIRECTION VERS LA PAGE PROFIL
 if (estConnecte()) { // si le membre est connecté on le renvoi vers le profil
@@ -42,7 +42,7 @@ if ( !empty( $_POST ) ) {
 
         if ( $resultat->rowCount() == 1 )  { // si il y a une ligne c'est qu'il y a ce pseudo et ce membre
             $membre = $resultat->fetch( PDO::FETCH_ASSOC ); 
-            debug($membre);
+            // debug($membre);
 
                 if ( password_verify($_POST['mdp'], $membre['mdp'])) { // si le hash du mdp de la bdd correspond au mdp du formulaire, alors password_verify retourne true
                     // echo 'coucou le membre';

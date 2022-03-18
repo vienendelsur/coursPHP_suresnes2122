@@ -26,26 +26,57 @@
    <div class="container">      
         <section class="row m-4 justify-content-center">            
             <div class="col-md-8 p-2 bg-light border border-primary">
+            
+             
+                 <tbody>
+                   <tr>
+                     <td scope="row"></td>
+                     <td></td>
+                     <td></td>
+                   </tr>
+                   <tr>
+                     <td scope="row"></td>
+                     <td></td>
+                     <td></td>
+                   </tr>
+                 </tbody>
+             </table>
+              
+             <table class="table table-striped table-sm table-bordered table-hover table-inverse table-responsive">
+             <thead class="thead-inverse">
+                 <tr>
+                   <th>Numéro</th>
+                   <th>Produit</th>
+                   <th>Description</th>
+                   <th>Couleur</th>
+                   <th>Prix</th>
+                   <th>Image</th>
+                   <th>Voir</th>
+                 </tr>
+                 </thead>
+                 <tbody>
             <?php
               $requete = $pdoMAB->query( " SELECT * FROM produits " );
-              debug($requete);
-              $nbr_produits = $requete->rowCount();
-              debug($nbr_produits); 
+              // debug($requete);
+              // $nbr_produits = $requete->rowCount();
+              // debug($nbr_produits); 
             
-
+              
               while ( $ligne = $requete->fetch( PDO::FETCH_ASSOC )) { ?>
               
                 <tr>
-                    <td><?php echo $ligne['id_produit']; ?></td>                   
+                    <td scope="row">n° <?php echo $ligne['id_produit']; ?></td>                   
                     <td><?php echo $ligne['titre']. ' ' .$ligne['categorie']; ?></td>
                     <td><?php echo $ligne['description']; ?></td>
                     <td><?php echo $ligne['couleur']; ?></td>
-                    <td><?php echo $ligne['stock']; ?></td>
-           <td><a href="#?id_produit=<?php echo $ligne['id_produit']; ?>">VOIR</a></td>
+                    <td><?php echo $ligne['photo']; ?></td>
+                    <td><?php echo $ligne['prix']; ?> €</td>
+           <td><a href="produit.php?id_produit=<?php echo $ligne['id_produit']; ?>">Voir le produit</a></td>
                 </tr>
                 <!-- fermeture de la boucle -->
-            <?php   } 
-            ?>
+            <?php   } ?>
+                 </tbody>
+            </table>
             </div>
         <!-- fin col -->
         </section>

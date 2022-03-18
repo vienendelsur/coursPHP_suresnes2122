@@ -2,7 +2,7 @@
 // require connexion, session etc.
 require_once 'inc/init.inc.php';
 
-debug($_SESSION);
+// debug($_SESSION);
 // debug(strlen(' ma grand mère fait du vélo plus vite que moi '));
 
 if ( !empty($_POST) ) {
@@ -95,10 +95,15 @@ if ( !empty($_POST) ) {
   <body class="m-2">
    <header class="container bg-primary text-white p-4 ">
         <h1 class="display-4">Créez votre compte</h1>
-        <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti amet qui accusantium reprehenderit placeat! Officiis laborum voluptatum incidunt, iure enim, tempore aperiam necessitatibus rerum ipsam, blanditiis sunt voluptates neque ex?</p>
+        <p class="lead">Création d'un compte à " La Boutique "</p>
    </header>
 
-   <div class="container"><?php echo $contenu; ?>
+   <div class="container">
+       <div class="row pt-2 justify-content-center">
+          <div class="col-6 text-center">
+               <?php echo $contenu; ?>
+          </div>
+       </div>
         <section class="row m-4 justify-content-center">
              
             <div class="col-md-6 p-2 bg-light border border-primary">

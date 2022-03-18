@@ -35,6 +35,25 @@ if ( !empty($_POST) ) {
 		':salaire' => $_POST['salaire'],
 	));
 }
+// 4 INITIALISATION DE LA VARIABLE $contenu
+$contenu = "";
+
+// 5 SUPPRESSION D'UN EMPLOYE
+// debug($_GET);
+if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_employes'])) {
+  $resultat = $pdoENT->prepare( " DELETE FROM employes WHERE id_employes = :id_employes " );
+
+  $resultat->execute(array(
+    ':id_employes' => $_GET['id_employes']
+  ));
+
+  if ($resultat->rowCount() == 0) {
+    $contenu .= '<div class="alert alert-danger"> Erreur de suppression</div>';
+  } else {
+    $contenu .= '<div class="alert alert-success"> Employé supprimé</div>';
+  }
+}
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -69,7 +88,7 @@ if ( !empty($_POST) ) {
   
         <section class="row">
   
-          <div class="col-md-8">
+          <div class="col-md-12">
             <h2>les employés</h2>
             <?php
 			// 3 affichage de données 
@@ -79,6 +98,7 @@ if ( !empty($_POST) ) {
               // debug($nbr_commentaires);
             ?>
             <h5>Il y a <?php echo $nbr_employes; ?> employés </h5>
+            <?php echo $contenu; ?>
 
             <table class="table table-striped">
              <thead>
@@ -89,7 +109,8 @@ if ( !empty($_POST) ) {
                  <th>Service</th>
                  <th>Salaire</th>
                  <th>Date d'embauche</th>
-                 <th>Fiche employé</th>
+                 <th>Détail</th>
+                 <th>Suppression</th>
                </tr>
              </thead>
              <tbody>
@@ -103,6 +124,7 @@ if ( !empty($_POST) ) {
 				   <td><?php echo $ligne['salaire']; ?></td>
 				   <td><?php echo $ligne['date_embauche']; ?></td>
           <td><a href="03_fiche_employe.php?id_employes=<?php echo $ligne['id_employes']; ?>">maj</a></td>
+          <td><a href="?action=supprimer&id_employes=<?php echo $ligne['id_employes']; ?>" onclick="return(confirm('Voulez-vous supprimer cet employé ? '))">suppression</a></td>
 			   </tr>
 			   <!-- fermeture de la boucle -->
 			   <?php } ?>
@@ -111,7 +133,7 @@ if ( !empty($_POST) ) {
           </div>
           <!-- fin col -->
   
-          <div class="col-md-4">
+          <div class="col-md-12">
             <h2>Nouvel employé</h2>
             <!-- action vide car nous envoyons les données avec cette même page et POST va envoyer dans la superglobale $_POST -->
 			<form action="" method="POST" class="border border-primary p-1">
