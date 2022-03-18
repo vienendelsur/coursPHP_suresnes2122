@@ -23,7 +23,7 @@ if (!empty($_POST)) {
         $contenu .='<div class="alert alert-warning">Titre entre 10 et 100 caractères</div>';
     }
 
-    if ( !isset($_POST['description']) || strlen($_POST['description']) < 4 || strlen($_POST['description']) > 20) {
+    if ( !isset($_POST['description']) || strlen($_POST['description']) < 4 || strlen($_POST['description']) > 200) {
         $contenu .='<div class="alert alert-warning">Description incomplète !</div>';
     }
     if ( !isset($_POST['couleur']) || strlen($_POST['couleur']) < 4 || strlen($_POST['couleur']) > 20) {
@@ -59,9 +59,9 @@ if (!empty($_POST)) {
     $_POST['prix'] = htmlspecialchars($_POST['prix']);
     $_POST['stock'] = htmlspecialchars($_POST['stock']);
 
-    debug($_POST);
+    // debug($_POST);
 
-    debug($_FILES);
+    // debug($_FILES);
     // traitement du fichier image, de la photo
 
     $photo_bdd = '';
@@ -104,6 +104,11 @@ if (!empty($_POST)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>La Boutique - Administration</title>
+
+    <!-- CKeditor -->
+    <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+
+
   </head>
   <body class="m-2">
    <header class="container bg-primary text-white p-4 ">
@@ -161,8 +166,8 @@ if (!empty($_POST)) {
                     <input type="text" name="titre" id="titre" class="form-control">
 
                     <label for="description" class="form-label">Description *</label>
-                    <textarea name="description" id="description" cols="30" rows="3" class="form-control"></textarea>
-
+                        <textarea name="description" cols="30" rows="3" class="form-control">&lt;p&gt;This is some sample content.&lt;/p&gt;</textarea>
+                    
                     <label for="couleur" class="form-label">Couleur *</label>
                     <input type="text" name="couleur" id="couleur" class="form-control">
 
@@ -203,6 +208,10 @@ if (!empty($_POST)) {
         <!-- fin row -->
         
    </div>
+
+   <script>
+          CKEDITOR.replace( 'description' );
+    </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

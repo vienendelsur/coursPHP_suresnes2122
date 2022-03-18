@@ -77,6 +77,7 @@
             <?php   } ?>
                  </tbody>
             </table>
+            
             </div>
         <!-- fin col -->
         </section>
