@@ -44,24 +44,20 @@ if (!empty($_POST)) {
     if ( !isset($_POST['stock']) ) {
         $contenu .='<div class="alert alert-warning">Stock : rentrez la quantité !</div>';
     }
-    
-    debug($_POST);
-    
-    var_dump($_POST);
 
     if (empty($contenu)) {
-
     $_POST['reference'] = htmlspecialchars($_POST['reference']);
     $_POST['categorie'] = htmlspecialchars($_POST['categorie']);
     $_POST['titre'] = htmlspecialchars($_POST['titre']);
-    $_POST['description'] = $_POST['description'];
+    $_POST['description'] = addslashes($_POST['description']);
     $_POST['couleur'] = htmlspecialchars($_POST['couleur']);
     $_POST['taille'] = htmlspecialchars($_POST['taille']);
     $_POST['public'] = htmlspecialchars($_POST['public']);
     $_POST['prix'] = htmlspecialchars($_POST['prix']);
     $_POST['stock'] = htmlspecialchars($_POST['stock']);
 
-    
+    // debug($_POST);
+    // var_dump($_POST);
 
     // debug($_FILES);
     // traitement du fichier image, de la photo
@@ -123,8 +119,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
 
     <title>La Boutique - Administration</title>
 
-	 <!-- ck editor 5  -->
-     <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+	<!-- ck editor 4  -->
+    <script src="https://cdn.ckeditor.com/4.18.0/basic/ckeditor.js"></script>
 
   </head>
   <body class="m-2">
@@ -194,8 +190,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
                     <input type="text" name="titre" id="titre" class="form-control">
 
                     <label for="description" class="form-label">Description *</label>
-                    <textarea name="description" id="description" cols="30" rows="3" class="form-control">Exemple de description.</textarea>
-                    
+                    <textarea name="description" cols="30" rows="3" class="form-control">Exemple de description.</textarea>
+                    <script>
+                        CKEDITOR.replace( 'description' );
+                    </script>
                     <label for="couleur" class="form-label">Couleur *</label>
                     <input type="text" name="couleur" id="couleur" class="form-control">
 
@@ -236,15 +234,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
         <!-- fin row -->
         
    </div>
-
-   <!-- CK editor classic 5 -->
-   <script>
-      ClassicEditor
-          .create( document.querySelector( '#description' ) )
-          .catch( error => {
-              console.error( error );
-          } );
-      </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

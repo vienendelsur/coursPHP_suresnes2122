@@ -7,9 +7,9 @@ if (!estAdmin()) { // accès non autorisé si on n'est pas admin (et pas connect
 }
 
 // 3 RÉCEPTION DES INFORMATIONS D'UN PRODUIT AVEC $_GET
-// debug($_GET);
+debug($_GET);
 if ( isset($_GET['id_produit']) ) {
-    // debug($_GET);
+    debug($_GET);
     $resultat = $pdoMAB->prepare( " SELECT * FROM produits WHERE id_produit = :id_produit " );
     $resultat->execute(array(
       ':id_produit' => $_GET['id_produit']
@@ -29,28 +29,34 @@ if ( isset($_GET['id_produit']) ) {
 //4 TRAITEMENT DE MISE À JOUR D'UN EMPLOYÉ
 if ( !empty($_POST) ) {//not empty
   debug($_POST);
-$_POST['reference'] = htmlspecialchars($_POST['reference']);// pour se prémunir des failles et des injections SQL
+
+$_POST['reference'] = htmlspecialchars($_POST['reference']);
 $_POST['categorie'] = htmlspecialchars($_POST['categorie']);
 $_POST['titre'] = htmlspecialchars($_POST['titre']);
-$_POST['description'] = htmlspecialchars($_POST['description']);
+$_POST['description'] = $_POST['description'];
 $_POST['couleur'] = htmlspecialchars($_POST['couleur']);
 $_POST['taille'] = htmlspecialchars($_POST['taille']);
 $_POST['public'] = htmlspecialchars($_POST['public']);
-$_POST['public'] = htmlspecialchars($_POST['public']);
+$_POST['prix'] = htmlspecialchars($_POST['prix']);
+$_POST['stock'] = htmlspecialchars($_POST['stock']);
 
-$resultat = $pdoENT->prepare( " UPDATE produits SET reference = :reference, categorie = :categorie, titre = :titre, description = :description, couleur = :couleur, taille = :taille WHERE id_produit = :id_produit " );// requete préparée avec des marqueurs
+$resultat = $pdoMAB->prepare( " UPDATE produits SET reference = :reference, categorie = :categorie, titre = :titre, description = :description, couleur = :couleur, taille = :taille, public = :public, prix = :prix, stock = :stock WHERE id_produit = :id_produit " );// requete préparée avec des marqueurs
 
 $resultat->execute( array(
-  ':prenom' => $_POST['prenom'],
-  ':nom' => $_POST['nom'],
-  ':sexe' => $_POST['sexe'],
-  ':service' => $_POST['service'],
-  ':date_embauche' => $_POST['date_embauche'],
-  ':salaire' => $_POST['salaire'],
-  ':id_employes' => $_GET['id_employes'],
+  ':reference' => $_POST['reference'],
+  ':categorie' => $_POST['categorie'],
+  ':titre' => $_POST['titre'],
+  ':description' => $_POST['description'],
+  ':couleur' => $_POST['couleur'],
+  ':taille' => $_POST['taille'],
+  ':public' => $_POST['public'],
+  // ':photo' => $photo_bdd,
+  ':prix' => $_POST['prix'],
+  ':stock' => $_POST['stock'],
+  ':id_produit' => $_GET['id_produit']
 
 ));
-header('location:02_employes.php');
+header('location:accueil.php');
 exit();
 }
 
@@ -66,12 +72,25 @@ exit();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>La Boutique - Administration</title>
+
+    <!-- ck editor 5  -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+
   </head>
   <body class="m-2">
-   <header class="container bg-primary text-white p-4 ">
-        <h1 class="display-4">La Boutique - Administration</h1>
-        <p class="lead">La Boutique - gestion d'un produit</p>
+      
+  <?php require_once '../inc/nav.inc.php'; ?>
+
+  <header class="container bg-warning text-white p-4 ">
+        <div class="row">
+          <div class="col-5">
+            <h1 class="display-4">Admin</h1>
+            <p class="lead">Gestion du produit ID <?php echo $fiche['id_produit']; ?> </p>
+          </div>         
+          <?php require_once '../inc/navbis.inc.php'; ?>
+        </div>
    </header>
+
    <div class="container">      
         <section class="row m-4 justify-content-center">
             <h2>Le produit : <?php echo $fiche['titre']; ?></h2>           
@@ -114,7 +133,7 @@ exit();
                     <input type="text" name="titre" id="titre" class="form-control" value="<?php echo $fiche['titre'] ?? ''; ?>">
 
                     <label for="description" class="form-label">Description *</label>
-                    <textarea name="description" id="description" cols="30" rows="3" class="form-control"><?php echo $fiche['description'] ?? ''; ?></textarea>
+                    <textarea name="description" id="editor" cols="30" rows="3" class="form-control"><?php echo $fiche['description']; ?></textarea>
 
                     <label for="couleur" class="form-label">Couleur *</label>
                     <input type="text" name="couleur" id="couleur" class="form-control" value="<?php echo $fiche['couleur'] ?? ''; ?>">
@@ -139,8 +158,8 @@ exit();
                     <input type="radio" name="public" value="mixte" class="form-check-input">
                     <label for="public" class="form-check-label">Mixte</label>
 
-                    <label for="photo" class="form-label">Photographie *</label>
-                    <input type="file" name="photo" id="photo" class="form-control">
+                    <!-- <label for="photo" class="form-label">Photographie *</label>
+                    <input type="file" name="photo" id="photo" class="form-control"> -->
                     <!-- pour pouvoir utiliser le type="file" il FAUT ABSOLUMENT l'attribut enctype="multipart/form-data" dans la balise form-->
 
                     <label for="prix" class="form-label">Prix *</label>
@@ -158,6 +177,15 @@ exit();
         <!-- fin row -->
         
    </div>
+
+   <!-- CK editor classic 5 -->
+    <script>
+      ClassicEditor
+          .create( document.querySelector( '#editor' ) )
+          .catch( error => {
+              console.error( error );
+          } );
+      </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

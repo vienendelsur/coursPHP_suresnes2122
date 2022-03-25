@@ -24,8 +24,10 @@ if (!estConnecte()) { // accès à la page autorisé quand on est connecté
 
     <title>La boutique - Bienvenue </title>
   </head>
-<body>
-    <header class="container bg-warning p-4 ">
+  <body class="m-2">      
+      <?php require_once 'inc/nav.inc.php'; ?>
+
+    <header class="container bg-warning p-4">
             <h1 class="display-4">Votre profil </h1>
             <p class="lead">Bonjour <?php echo $_SESSION['membre']['prenom']; ?>
             <?php
@@ -41,7 +43,7 @@ if (!estConnecte()) { // accès à la page autorisé quand on est connecté
                 if(estAdmin()) { // si le membre est 'admin' il n'a pas les mêmes accès qu'un membre 'client'
                     echo '<li class="nav-item"><a class="btn btn-primary" href="' .RACINE_SITE. 'admin/accueil.php">Espace admin</a></li>';
                     echo '<li class="nav-item"><a class="btn btn-success" href="' .RACINE_SITE. 'accueil.php">Aller à la boutique</a></li>';
-                    echo 'coucou';
+                    // echo 'coucou';
                 } else {
                     echo '<li class="nav-item"><a class="btn btn-success" href="accueil.php">Retour à la boutique</a></li>';
                 }

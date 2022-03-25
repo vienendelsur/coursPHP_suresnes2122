@@ -11,7 +11,8 @@
 
     <title>La boutique - Accueil</title>
   </head>
-  <body class="m-2">
+  <body class="m-2">      
+      <?php require_once 'inc/nav.inc.php'; ?>
    <header class="container bg-warning text-white p-4 ">
      <div class="row">
         <div class="col">
@@ -26,21 +27,6 @@
    <div class="container">      
         <section class="row m-4 justify-content-center">            
             <div class="col-md-8 p-2 bg-light border border-primary">
-            
-             
-                 <tbody>
-                   <tr>
-                     <td scope="row"></td>
-                     <td></td>
-                     <td></td>
-                   </tr>
-                   <tr>
-                     <td scope="row"></td>
-                     <td></td>
-                     <td></td>
-                   </tr>
-                 </tbody>
-             </table>
               
              <table class="table table-striped table-sm table-bordered table-hover table-inverse table-responsive">
              <thead class="thead-inverse">
@@ -61,15 +47,14 @@
               // $nbr_produits = $requete->rowCount();
               // debug($nbr_produits); 
             
-              
               while ( $ligne = $requete->fetch( PDO::FETCH_ASSOC )) { ?>
               
                 <tr>
                     <td scope="row">n° <?php echo $ligne['id_produit']; ?></td>                   
                     <td><?php echo $ligne['titre']. ' ' .$ligne['categorie']; ?></td>
-                    <td><?php echo $ligne['description']; ?></td>
+                    <td><?php echo html_entity_decode($ligne['description']); ?></td>
                     <td><?php echo $ligne['couleur']; ?></td>
-                    <td><?php echo $ligne['photo']; ?></td>
+                    <td> <img src="<?php echo $ligne['photo']; ?>" class="figure-img img-fluid rounded img-admin"></td>
                     <td><?php echo $ligne['prix']; ?> €</td>
            <td><a href="produit.php?id_produit=<?php echo $ligne['id_produit']; ?>">Voir le produit</a></td>
                 </tr>

@@ -29,8 +29,10 @@ session_start();
 define('RACINE_SITE', '/coursPHP_suresnes2122/10-boutique/');
 
 
-//4- UNE VARIABLE POUR LES MESSAGES ATTENTION ne pas mettre d'espace dans la variable !
+//4- DEUX VARIABLEs POUR LES MESSAGES attention à ne pas mettre d'espace dans la variable !
 $contenu = '';
+$contenu02 = '';
+
 
 //5- INCLUSION DES FONCTIONS
 require_once 'functions.inc.php';
