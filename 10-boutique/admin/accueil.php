@@ -15,8 +15,9 @@ if (!empty($_POST)) {
     if ( !isset($_POST['reference']) || strlen($_POST['reference']) < 5 || strlen($_POST['reference']) > 20) {
         $contenu .='<div class="alert alert-warning">La référence : entre 5 et 20 caractères</div>';
     }
-    if ( !isset($_POST['categorie']) || strlen($_POST['categorie']) < 2 || strlen($_POST['categorie']) > 20) {
-        $contenu .='<div class="alert alert-warning">Catégorie : entre 5 et 20 caractères</div>';
+    
+    if ( !isset($_POST['id_categorie']) || strlen($_POST['id_categorie']) < 1 || strlen($_POST['id_categorie']) > 3) {
+        $contenu .='<div class="alert alert-warning">Choissisez la bonne catégorie</div>';
     }
 
     if ( !isset($_POST['titre']) || strlen($_POST['titre']) < 5 || strlen($_POST['titre']) > 100) {
@@ -52,7 +53,7 @@ if (!empty($_POST)) {
     if (empty($contenu)) {
 
     $_POST['reference'] = htmlspecialchars($_POST['reference']);
-    $_POST['categorie'] = htmlspecialchars($_POST['categorie']);
+    $_POST['id_categorie'] = $_POST['id_categorie'];
     $_POST['titre'] = htmlspecialchars($_POST['titre']);
     $_POST['description'] = $_POST['description'];
     $_POST['couleur'] = htmlspecialchars($_POST['couleur']);
@@ -72,10 +73,10 @@ if (!empty($_POST)) {
         copy($_FILES['photo']['tmp_name'], '../' .$photo_bdd);
     }//fin du traitement photo
 
-    $requete =  executeRequete( " INSERT INTO produits (reference, categorie, titre, description, couleur, taille, public, photo, prix, stock ) VALUES ( :reference, :categorie, :titre, :description, :couleur, :taille, :public, :photo, :prix, :stock ) ",
+    $requete =  executeRequete( " INSERT INTO produits (reference, id_categorie, titre, description, couleur, taille, public, photo, prix, stock ) VALUES ( :reference, :id_categorie, :titre, :description, :couleur, :taille, :public, :photo, :prix, :stock ) ",
     array(
         ':reference' => $_POST['reference'],
-        ':categorie' => $_POST['categorie'],
+        ':id_categorie' => $_POST['id_categorie'],
         ':titre' => $_POST['titre'],
         ':description' => $_POST['description'],
         ':couleur' => $_POST['couleur'],
@@ -146,7 +147,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
           
             <?php echo $contenu02; ?>
             <?php
-             $requete = $pdoMAB->query( " SELECT * FROM produits " );
+             $requete = $pdoMAB->query( " SELECT * FROM produits, categories WHERE produits.id_categorie = categories.id_categorie " );
              $nbr_produits = $requete->rowCount();
             ?>
             <h2>Les produits : <?php echo $nbr_produits; ?></h2>           
@@ -159,7 +160,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
                     <td> <img src="../<?php echo $ligne['photo']; ?>" class="figure-img img-fluid rounded img-admin"></td>
                     <td> <?php echo $ligne['id_produit']; ?></td>
                     <td>ref. <?php echo $ligne['reference']; ?></td>                   
-                    <td><?php echo $ligne['titre']. ' ' .$ligne['categorie']; ?></td>
+                    <td><?php echo $ligne['titre']. ' ** ' .$ligne['categorie']; ?></td>
                     <td><?php echo html_entity_decode($ligne['description']); ?></td>
                     <td><?php echo $ligne['couleur']; ?></td>
                     <td><?php echo $ligne['public']; ?></td>
@@ -187,8 +188,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
                     <label for="reference" class="form-label">Référence *</label>
                     <input type="text" name="reference" id="reference" class="form-control">
 
-                    <label for="categorie" class="form-label">Catégorie *</label>
-                    <input type="text" name="categorie" id="categorie" class="form-control">
+                    <label for="id_categorie" class="form-label">Catégorie *</label>
+                    <select name="id_categorie" id="id_categorie" class="form-select">
+                       <?php
+                        foreach ( $pdoMAB->query ( " SELECT * FROM categories ORDER BY categorie ASC " ) as $ligne_categorie ) {
+                            echo '<option value="' .$ligne_categorie['id_categorie']. '">' .$ligne_categorie['categorie']. '</option>';
+                        }
+                       ?>
+                    </select>
 
                     <label for="titre" class="form-label">Titre *</label>
                     <input type="text" name="titre" id="titre" class="form-control">

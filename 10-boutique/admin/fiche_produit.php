@@ -10,7 +10,7 @@ if (!estAdmin()) { // accès non autorisé si on n'est pas admin (et pas connect
 debug($_GET);
 if ( isset($_GET['id_produit']) ) {
     debug($_GET);
-    $resultat = $pdoMAB->prepare( " SELECT * FROM produits WHERE id_produit = :id_produit " );
+    $resultat = $pdoMAB->prepare( " SELECT * FROM produits, categories WHERE produits.id_categorie = categories.id_categorie AND id_produit = :id_produit " );
     $resultat->execute(array(
       ':id_produit' => $_GET['id_produit']
     ));
@@ -26,7 +26,7 @@ if ( isset($_GET['id_produit']) ) {
       exit();// arrête du script
   }
 
-//4 TRAITEMENT DE MISE À JOUR D'UN EMPLOYÉ
+//4 TRAITEMENT DE MISE À JOUR D'UN PRODUIT
 if ( !empty($_POST) ) {//not empty
   debug($_POST);
 

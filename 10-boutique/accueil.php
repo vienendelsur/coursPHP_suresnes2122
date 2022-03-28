@@ -42,16 +42,19 @@
                  </thead>
                  <tbody>
             <?php
-              $requete = $pdoMAB->query( " SELECT * FROM produits " );
-              // debug($requete);
+              $requete = $pdoMAB->query( " SELECT * FROM produits, categories WHERE produits.id_categorie = categories.id_categorie " );
+              debug($requete);
               // $nbr_produits = $requete->rowCount();
               // debug($nbr_produits); 
             
-              while ( $ligne = $requete->fetch( PDO::FETCH_ASSOC )) { ?>
-              
+              while ( $ligne = $requete->fetch( PDO::FETCH_ASSOC )) { 
+                
+                debug($ligne);
+                ?>
+             
                 <tr>
                     <td scope="row">n° <?php echo $ligne['id_produit']; ?></td>                   
-                    <td><?php echo $ligne['titre']. ' ' .$ligne['categorie']; ?></td>
+                    <td><?php echo $ligne['titre']. ' - ' .$ligne['categorie']; ?></td>
                     <td><?php echo html_entity_decode($ligne['description']); ?></td>
                     <td><?php echo $ligne['couleur']; ?></td>
                     <td> <img src="<?php echo $ligne['photo']; ?>" class="figure-img img-fluid rounded img-admin"></td>
