@@ -5,14 +5,45 @@ require_once '../inc/functions.php';
 // 2 CONNEXION BDD
 $pdoENT = new PDO( 'mysql:host=localhost;dbname=entreprise',// hôte nom BDD
               'root',// pseudo 
-              '',// mot de passe
-              // 'root',// mdp pour MAC avec MAMP
+              // '',// mot de passe
+              'root',// mdp pour MAC avec MAMP
               array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,// afficher les erreurs SQL dans le navigateur
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',// charset des échanges avec la BDD
               ));
               // debug($pdoENT);
               // debug(get_class_methods($pdoENT));
+
+// 3 GET POUR LE TRI DES COLONNES
+  
+$ordre = '';
+
+if(isset($_GET['colonne']) && isset($_GET['tri'])){
+debug($_GET);
+
+	if($_GET['colonne'] == 'nom'){
+        $ordre.= ' ORDER BY nom';
+        }
+        // elseif($_GET['column'] == 'firstname'){
+        //     $order.= ' ORDER BY firstname';
+        // }
+        // elseif($_GET['column'] == 'birthdate'){
+        //     $order.= ' ORDER BY birthdate';
+        // }
+    
+	if($_GET['tri'] == 'asc'){
+        $ordre.= ' ASC';
+        }
+        elseif($_GET['tri'] == 'desc'){
+        $ordre.= ' DESC';
+        }
+}// ferme le premier if pour le tri
+
+// 3 affichage de données 
+$requete = $pdoENT->query( " SELECT * FROM employes $ordre " );
+// debug($resultat);
+$nbr_employes = $requete->rowCount();
+// debug($nbr_commentaires);
 
 // 3 TRAITEMENT DU FORMULAIRE
 if ( !empty($_POST) ) {
@@ -91,11 +122,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
           <div class="col-md-12">
             <h2>les employés</h2>
             <?php
-			// 3 affichage de données 
-              $requete = $pdoENT->query( " SELECT * FROM employes ORDER BY id_employes DESC " );
-              // debug($resultat);
-              $nbr_employes = $requete->rowCount();
-              // debug($nbr_commentaires);
+			
             ?>
             <h5>Il y a <?php echo $nbr_employes; ?> employés </h5>
             <?php echo $contenu; ?>
@@ -104,7 +131,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
              <thead>
                <tr>
                  <th>Id</th>
-                 <th>Nom</th>
+                 <th><a href="02_employes.php?colonne=nom&tri=asc">a-z</a> Nom <a href="02_employes.php?colonne=nom&tri=desc">z-A</a></th>
                  <th>Prénom</th>
                  <th>Service</th>
                  <th>Salaire</th>
@@ -118,7 +145,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
                <?php while ( $ligne = $requete->fetch( PDO::FETCH_ASSOC )) { ?>
 			   <tr>
 				   <td><?php echo $ligne['id_employes']; ?></td>                   
-				   <td><?php echo $ligne['sexe']. ' ' .$ligne['nom']; ?></td>
+				   <td><?php echo $ligne['nom']; ?></td>
 				   <td><?php echo $ligne['prenom']; ?></td>
 				   <td><?php echo $ligne['service']; ?></td>
 				   <td><?php echo $ligne['salaire']; ?></td>
