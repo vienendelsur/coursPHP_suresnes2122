@@ -7,9 +7,9 @@ if (!estAdmin()) { // accès non autorisé si on n'est pas admin (et pas connect
 }
 
 // 3 RÉCEPTION DES INFORMATIONS D'UN PRODUIT AVEC $_GET
-debug($_GET);
+// debug($_GET);
 if ( isset($_GET['id_produit']) ) {
-    debug($_GET);
+    // debug($_GET);
     $resultat = $pdoMAB->prepare( " SELECT * FROM produits, categories WHERE produits.id_categorie = categories.id_categorie AND id_produit = :id_produit " );
     $resultat->execute(array(
       ':id_produit' => $_GET['id_produit']
@@ -20,7 +20,8 @@ if ( isset($_GET['id_produit']) ) {
           exit();// arrêt du script
       }  
       $fiche = $resultat->fetch(PDO::FETCH_ASSOC);//je passe les infos dans une variable
-    //   debug($fiche);// ferme if isset accolade suivante
+      // debug($fiche);// ferme if isset accolade suivante
+      // var_dump($fiche);
       } else {
       header('location:accueil.php');// si j'arrive sur la page sans rien dans l'url
       exit();// arrête du script
@@ -31,7 +32,7 @@ if ( !empty($_POST) ) {//not empty
   debug($_POST);
 
 $_POST['reference'] = htmlspecialchars($_POST['reference']);
-$_POST['categorie'] = htmlspecialchars($_POST['categorie']);
+$_POST['id_categorie'] = htmlspecialchars($_POST['id_categorie']);
 $_POST['titre'] = htmlspecialchars($_POST['titre']);
 $_POST['description'] = $_POST['description'];
 $_POST['couleur'] = htmlspecialchars($_POST['couleur']);
@@ -40,11 +41,11 @@ $_POST['public'] = htmlspecialchars($_POST['public']);
 $_POST['prix'] = htmlspecialchars($_POST['prix']);
 $_POST['stock'] = htmlspecialchars($_POST['stock']);
 
-$resultat = $pdoMAB->prepare( " UPDATE produits SET reference = :reference, categorie = :categorie, titre = :titre, description = :description, couleur = :couleur, taille = :taille, public = :public, prix = :prix, stock = :stock WHERE id_produit = :id_produit " );// requete préparée avec des marqueurs
+$resultat = $pdoMAB->prepare( " UPDATE produits SET reference = :reference, id_categorie = :id_categorie, titre = :titre, description = :description, couleur = :couleur, taille = :taille, public = :public, prix = :prix, stock = :stock WHERE id_produit = :id_produit " );// requete préparée avec des marqueurs
 
 $resultat->execute( array(
   ':reference' => $_POST['reference'],
-  ':categorie' => $_POST['categorie'],
+  ':id_categorie' => $_POST['id_categorie'],
   ':titre' => $_POST['titre'],
   ':description' => $_POST['description'],
   ':couleur' => $_POST['couleur'],
@@ -126,8 +127,18 @@ exit();
                     <!-- opérateur de coalescence ; si il n'y rien je mets une chaine vide  -->
                     <input type="text" name="reference" id="reference" class="form-control" value="<?php echo $fiche['reference'] ?? ''; ?>">
 
-                    <label for="categorie" class="form-label">Catégorie *</label>
-                    <input type="text" name="categorie" id="categorie" class="form-control" value="<?php echo $fiche['categorie'] ?? ''; ?>">
+                    <label for="id_categorie" class="form-label">Catégorie *</label>
+                    <select name="id_categorie" id="id_categorie" class="form-select">
+                       <?php
+                        foreach ( $pdoMAB->query ( " SELECT * FROM categories ORDER BY categorie ASC " ) as $ligne_categorie ) {
+                            echo '<option value="' .$ligne_categorie['id_categorie']. '"';
+                            if ( $ligne_categorie['id_categorie'] == $fiche['id_categorie'] ) {
+                              echo ' selected';
+                            }
+                            echo '>'  .$ligne_categorie['categorie']. '</option>';
+                        }
+                       ?>
+                    </select>
 
                     <label for="titre" class="form-label">Titre *</label>
                     <input type="text" name="titre" id="titre" class="form-control" value="<?php echo $fiche['titre'] ?? ''; ?>">
