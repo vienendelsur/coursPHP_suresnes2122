@@ -14,38 +14,38 @@ $pdoENT = new PDO( 'mysql:host=localhost;dbname=entreprise',// hôte nom BDD
               // debug($pdoENT);
               // debug(get_class_methods($pdoENT));
 
-// 3 TRI DES DONNEES DU TABLEAU 
-// a initialisation de la variable pour le select du tri des données 
-$order = '';
+// 3 GET POUR LE TRI DES COLONNES
+  
+$ordre = '';
 
-// b conditions multiples à partir de $_GET
-if (isset($_GET['colonne']) && isset($_GET['tri'])) {
-  debug($_GET);
-  if ($_GET['colonne'] == 'nom') {
-    $order .= 'ORDER BY nom';
-  } elseif ($_GET['colonne'] == 'salaire') {
-    $order .= 'ORDER BY salaire';
-  } elseif ($_GET['colonne'] == 'service') {
-    $order .= 'ORDER BY service';
-  }
+if(isset($_GET['colonne']) && isset($_GET['tri'])){
+debug($_GET);
 
+	if($_GET['colonne'] == 'nom'){
+        $ordre.= ' ORDER BY nom';
+        }
+        // elseif($_GET['column'] == 'firstname'){
+        //     $order.= ' ORDER BY firstname';
+        // }
+        // elseif($_GET['column'] == 'birthdate'){
+        //     $order.= ' ORDER BY birthdate';
+        // }
+    
+	if($_GET['tri'] == 'asc'){
+        $ordre.= ' ASC';
+        }
+        elseif($_GET['tri'] == 'desc'){
+        $ordre.= ' DESC';
+        }
+}// ferme le premier if pour le tri
 
-  if ($_GET['tri'] == 'asc') {
-    $order .= ' ASC';
-  }
-  elseif ($_GET['tri'] == 'desc') {
-    $order .= ' DESC';
-  }
-}
-
-// d select 
-$requete = $pdoENT->query( " SELECT * FROM employes $order " );
-// debug($requete);
+// 3 affichage de données 
+$requete = $pdoENT->query( " SELECT * FROM employes $ordre " );
+// debug($resultat);
 $nbr_employes = $requete->rowCount();
-// debug($nbr_employes);
-          
+// debug($nbr_commentaires);
 
-// 4 TRAITEMENT DU FORMULAIRE
+// 3 TRAITEMENT DU FORMULAIRE
 if ( !empty($_POST) ) {
     // debug($_POST);
   $_POST['prenom'] = htmlspecialchars($_POST['prenom']);// pour se prémunir des failles et des injections SQL
@@ -66,10 +66,10 @@ if ( !empty($_POST) ) {
 		':salaire' => $_POST['salaire'],
 	));
 }
-// 5 INITIALISATION DE LA VARIABLE $contenu
+// 4 INITIALISATION DE LA VARIABLE $contenu
 $contenu = "";
 
-// 6 SUPPRESSION D'UN EMPLOYE
+// 5 SUPPRESSION D'UN EMPLOYE
 // debug($_GET);
 if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_employes'])) {
   $resultat = $pdoENT->prepare( " DELETE FROM employes WHERE id_employes = :id_employes " );
@@ -121,7 +121,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
   
           <div class="col-md-12">
             <h2>les employés</h2>
-            
+            <?php
+			
+            ?>
             <h5>Il y a <?php echo $nbr_employes; ?> employés </h5>
             <?php echo $contenu; ?>
 
@@ -129,10 +131,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
              <thead>
                <tr>
                  <th>Id</th>
-                 <th><a href="02_employes.php?colonne=nom&tri=asc">a-z</a> Nom <a href="02_employes.php?colonne=nom&tri=desc">z-a</a> </th>
+                 <th><a href="02_employes.php?colonne=nom&tri=asc">a-z</a> Nom <a href="02_employes.php?colonne=nom&tri=desc">z-A</a></th>
                  <th>Prénom</th>
-                 <th><a href="02_employes.php?colonne=service&tri=asc">a-z</a> Service <a href="02_employes.php?colonne=service&tri=desc">z-a</a></th>
-                 <th><a href="02_employes.php?colonne=salaire&tri=asc">a-z</a> Salaire <a href="02_employes.php?colonne=salaire&tri=desc">z-a</a></th>
+                 <th>Service</th>
+                 <th>Salaire</th>
                  <th>Date d'embauche</th>
                  <th>Détail</th>
                  <th>Suppression</th>
