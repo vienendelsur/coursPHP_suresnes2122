@@ -18,7 +18,7 @@ $pdoENT = new PDO( 'mysql:host=localhost;dbname=entreprise',// hôte nom BDD
 // a initialisation de la variable pour le select du tri des données 
 $order = '';
 
-// b conditions multiples à partir de $_GET
+// b conditions multiples à partir de $_GET cf. https://www.w3schools.com/php/php_if_else.asp
 if (isset($_GET['colonne']) && isset($_GET['tri'])) {
   debug($_GET);
   if ($_GET['colonne'] == 'nom') {
@@ -27,8 +27,7 @@ if (isset($_GET['colonne']) && isset($_GET['tri'])) {
     $order .= 'ORDER BY salaire';
   } elseif ($_GET['colonne'] == 'service') {
     $order .= 'ORDER BY service';
-  }
-
+  } 
 
   if ($_GET['tri'] == 'asc') {
     $order .= ' ASC';
