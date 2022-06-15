@@ -247,10 +247,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_
    <!-- CK editor classic 5 -->
    <script>
       ClassicEditor
-          .create( document.querySelector( '#description' ) )
+          .create( document.querySelector( '#description' ), {
+            // removePlugins: [ 'Heading', 'Link' ],
+            toolbar: [ 'bold', 'italic', 'bulletedList', 'numberedList', 'link' ]
+          } )
           .catch( error => {
               console.error( error );
           } );
+
+
       </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
